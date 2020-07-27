@@ -1,0 +1,4 @@
+{
+  "./admin/js/blocks.editor.js": "./admin/js/blocks.editor.js",
+  "./public/js/vacancyFeed.js": "./public/js/vacancyFeed.js"
+}

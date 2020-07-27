@@ -42,9 +42,6 @@ module.exports = (env, argv) => {
             }
         },
         plugins = [
-            new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep'],
-            }),
             new ManifestPlugin(),
             new webpack.HashedModuleIdsPlugin(),
         ]
@@ -64,13 +61,12 @@ module.exports = (env, argv) => {
         mode: isProduction ? 'production' : 'development',
         context: path.resolve(__dirname),
         entry: {
-            vacancyFeed: [
-                './assets/js/vacancy.js',
-            ],
+            "./admin/js/blocks.editor": "./assets/blocks/index.js",
+            "./public/js/vacancyFeed": "./assets/frontend/vacancy.js"
         },
         output: {
-            path: path.resolve(__dirname, './dist'),
-            filename: '[name].[contenthash].js',
+            path: path.resolve(__dirname),
+            filename: '[name].js',
         },
         module: {
             rules: [
