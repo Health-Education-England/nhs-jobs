@@ -8,13 +8,14 @@ import icon from './icon';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { URLInput } = wp.blockEditor;
+const { DateTimePicker, ToggleControl } = wp.components;
 
 // Register Block
 
 export default registerBlockType(
-	'nhsjobs/jobsfeed',
+	'nhsjobs/opportunites',
 	{
-		title: __('Jobs Block', 'nhsjobs' ),
+		title: __('Opportunites', 'nhsjobs' ),
 		description: __('Add a feed from the NHS jobs site.', 'nhsjobs' ),
 		category: 'nhsblocks',
 		icon: icon,
@@ -25,7 +26,13 @@ export default registerBlockType(
 		attributes: {
 			url: {
 				type: 'string'
-			}
+			},
+			end: {
+				type: 'string',
+				default: new Date(),
+				source: 'meta',
+				meta: 'nhsjobs_end',
+			},
 		},
 		supports: {
 			align: false, // allow all alignments can also choose array of allowed alignments eg [ 'left', 'right', 'full' ]
@@ -38,16 +45,14 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { url }, className, isSelected, setAttributes } = props;
+			const { attributes: { end }, className, isSelected, setAttributes } = props;
 			return (
 				<div className={ className } >
-					<h3>{ __('Add feed from the NHS jobs site in here:', 'nhsjobs' ) }</h3>
-					<URLInput
-						placeholder={ __( "Add NHS feed URL", "_vt" ) }
-						onChange={ url => setAttributes( { url } ) }
-						value={ url }
-					/>
-					<p>{ __('If you leave this field blank the feed will default to: https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title') } </p>
+					<DateTimePicker
+			            currentDate={ end }
+			            onChange={ ( end ) => setAttributes( { end } ) }
+			            is12Hour={ true }
+                    />
 				</div>
 			);
 		},

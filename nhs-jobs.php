@@ -54,11 +54,18 @@ function _get_plugin_url() {
 /**
  * The code that runs during plugin activation.
  */
-function activate_test() {
+function nhsjobs_activate() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/activation.php';
 }
 
-register_activation_hook( __FILE__, 'activate_test' );
+function nhsjobs_deactivate() {
+    require_once plugin_dir_path( __FILE__ ) . 'includes/deactivation.php';
+}
+
+
+register_activation_hook( __FILE__, 'nhsjobs_activate' );
+
+register_deactivation_hook( __FILE__, 'nhsjobs_deactivate' );
 
 
 require_once 'admin/admin.php';

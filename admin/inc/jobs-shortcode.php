@@ -23,8 +23,10 @@ add_action( 'wp_ajax_nopriv_fetchVacancies', 'fetchVacancies' );
 
 
 //[nhsjobfeed]
-function nhsjobfeed_shortcode( $atts, $content = null )
-{
+function nhsjobfeed_shortcode( $atts, $content = null ){
+
+    $inputurl = $atts['url'];
+
     $url = admin_url("admin-ajax.php");
     $nonce = wp_create_nonce();
 
@@ -38,7 +40,9 @@ function nhsjobfeed_shortcode( $atts, $content = null )
         true
     );
 
-    $feed = html_entity_decode($atts['url']);
+    $feed_url = $inputurl ? $inputurl : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&amp;field=title';
+
+    $feed = html_entity_decode( $feed_url );
     $feed = urlencode($feed);
 
     return <<<EOT

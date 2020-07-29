@@ -1,7 +1,9 @@
 <?php
 
-// do_shortcode( '[nhsjobfeed url=https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&amp;field=title]' );
+    $namespace = 'nhsjobs/jobsfeed/';
 
+    $inputurl = get_query_var( $namespace . 'url' );
+    
 
     $url = admin_url("admin-ajax.php");
     $nonce = wp_create_nonce();
@@ -16,9 +18,9 @@
         true
     );
 
-    $feed_url = 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&amp;field=title';
+    $feed_url = $inputurl ? $inputurl : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&amp;field=title';
 
-    $feed = html_entity_decode( $feed_url );
+    $feed = html_entity_decode( esc_url( $feed_url ) );
     $feed = urlencode( $feed );
 
 ?>
@@ -27,7 +29,7 @@
 <div id='nhs-feed' class='loading'></div>
 <script>
     window.FEED = {
-        url: "<?php echo $url ?>",
+        url: "<?php echo esc_url( $url ) ?>",
         action: 'fetchVacancies',
         nonce: "<?php echo $nonce ?>",
         feed: "<?php echo $feed ?>",
