@@ -68,4 +68,6 @@ register_activation_hook( __FILE__, 'nhsjobs_activate' );
 register_deactivation_hook( __FILE__, 'nhsjobs_deactivate' );
 
 
+// require_once 'includes/terms.php';
+
 require_once 'admin/admin.php';
