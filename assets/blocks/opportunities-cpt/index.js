@@ -1,6 +1,7 @@
 // Block dependancies
 
 import icon from './icon';
+import NHSTaxSelect from './taxSelect'
 
 
 // Internal block libraries
@@ -33,6 +34,12 @@ export default registerBlockType(
 				source: 'meta',
 				meta: 'nhsjobs_end',
 			},
+			location: {
+				type: 'string'
+			},
+			country: {
+				type: 'string'
+			}
 		},
 		supports: {
 			align: false, // allow all alignments can also choose array of allowed alignments eg [ 'left', 'right', 'full' ]
@@ -45,7 +52,7 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { end }, className, isSelected, setAttributes } = props;
+			const { attributes: { end, location, country }, className, isSelected, setAttributes } = props;
 			return (
 				<div className={ className } >
 					<DateTimePicker
@@ -53,6 +60,16 @@ export default registerBlockType(
 			            onChange={ ( end ) => setAttributes( { end } ) }
 			            is12Hour={ true }
                     />
+                    <NHSTaxSelect 
+                    	parentAttribute={ location }
+                    	childAttribute={ country }
+                    	parentAttrName='location'
+                    	childAttrName='country'
+                    	term='nhs_location'
+                    	parentLabel='Continent'
+                    	childLabel='Country'
+                    />
+                    { console.log( location, country ) }
 				</div>
 			);
 		},
