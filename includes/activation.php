@@ -2,12 +2,8 @@
 
 namespace NHS_JOBS\ACTIVATION;
 
-include 'location-terms.php';
+require_once 'speciality-terms.php';
 
-add_action( 'init',  __NAMESPACE__ . '\flush_rules', 30 );
+require_once 'location-terms.php';
 
-function flush_rules(){
-
-	flush_rewrite_rules();
-
-}
+flush_rewrite_rules();

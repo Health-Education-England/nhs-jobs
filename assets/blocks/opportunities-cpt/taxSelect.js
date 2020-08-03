@@ -7,6 +7,7 @@ const { dispatch } = wp.data;
 const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLabel, childAttribute, childTerms, childAttrName, childLabel, block, currentPost, term } ) => {
 
 
+	console.log( parentTerms );
 
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
@@ -23,14 +24,19 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 	}
 
 	const parentSelect = ( parentTerms ) =>{
+
+		if( parentTerms ){
 		
-		let selectItem = [ { label: 'Select ' +  parentLabel, value: 0 } ];
+			let selectItem = [ { label: 'Select ' +  parentLabel, value: 0 } ];
 
-		parentTerms.map((term, index) => {
-	        selectItem.push( { label: term.name, value: term.id } )
-	     })
+			parentTerms.map((term, index) => {
+		        selectItem.push( { label: term.name, value: term.id } )
+		     })
 
-		return selectItem;
+			return selectItem;
+		}else{
+			return[];
+		}
 	}
 
 

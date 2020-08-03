@@ -1,33 +1,39 @@
 <?php
 
-namespace NHS_JOBS\ACTIVATION\AddTerms;
+namespace NHS_JOBS\ACTIVATION\AddLocationTerms;
 
 function location_parent_terms(){
 
 	$location_parents = array(
 		array(
 			'name' => 'African Region',
-			'slug' => 'african-region'
+			'slug' => 'african-region',
+			'children' => location_african_terms()
 		),
 		array(
 			'name' => 'Region of the Americas',
-			'slug' => 'region-americas'
+			'slug' => 'region-americas',
+			'children' => location_americas_terms()
 		),
 		array(
 			'name' => 'South-East Asia Region',
-			'slug' => 'south-east-asia-region'
+			'slug' => 'south-east-asia-region',
+			'children' => location_SEAsia_terms()
 		),
 		array(
 			'name' => 'European Region',
-			'slug' => 'european-region'
+			'slug' => 'european-region',
+			'children' => location_european_terms()
 		),
 		array(
 			'name' => 'Eastern Mediterranean Region',
-			'slug' => 'eastern-mediterranean-region'
+			'slug' => 'eastern-mediterranean-region',
+			'children' => location_easternMediterranean_terms()
 		),
 		array(
 			'name' => 'Western Pacific Region',
-			'slug' => 'western-pacific-region'
+			'slug' => 'western-pacific-region',
+			'children' => location_westernPacific_terms()
 		)
 
 	);
@@ -284,10 +290,6 @@ function location_westernPacific_terms(){
 }
 
 
-
-
-add_action( 'init',  __NAMESPACE__ . '\add_location_terms', 20 );
-
 function add_location_terms(){
 
 	$location_parents = location_parent_terms();
@@ -298,68 +300,19 @@ function add_location_terms(){
 			'slug' => $location['slug']
 		) );
 
-	}
+		$parent_term = get_term_by( 'slug', $location['slug'], 'nhs_location' );
+		$child_term = $location['children'];
 
+		foreach ( $child_term as $term ) {
 
-	$parent_term = get_term_by( 'slug', 'african-region', 'nhs_location' );
+			wp_insert_term( $term, 'nhs_location', array(
+				'parent' => $parent_term->term_id
+			) );
 
-	$location_african = location_african_terms();
+		}
 
-	foreach ( $location_african as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
-	}
-
-	$parent_term = get_term_by( 'slug', 'region-americas', 'nhs_location' );
-
-	$location_americas = location_americas_terms();
-
-	foreach ( $location_americas as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
-	}
-
-	$parent_term = get_term_by( 'slug', 'south-east-asia-region', 'nhs_location' );
-
-	$location_SEAsia = location_SEAsia_terms();
-
-	foreach ( $location_SEAsia as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
-	}
-
-	$parent_term = get_term_by( 'slug', 'european-region', 'nhs_location' );
-
-	$location_european = location_european_terms();
-
-	foreach ( $location_european as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
-	}
-
-	$parent_term = get_term_by( 'slug', 'eastern-mediterranean-region', 'nhs_location' );
-
-	$location_easternMediterranean = location_easternMediterranean_terms();
-
-	foreach ( $location_easternMediterranean as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
-	}
-
-	$parent_term = get_term_by( 'slug', 'western-pacific-region', 'nhs_location' );
-
-	$location_westernPacific = location_westernPacific_terms();
-
-	foreach ( $location_westernPacific as $term) {
-		wp_insert_term( $term, 'nhs_location', array(
-			'parent' => $parent_term->term_id
-		) );
 	}
 
 }
 
+add_location_terms();

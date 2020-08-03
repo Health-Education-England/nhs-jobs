@@ -51,15 +51,25 @@ function _get_plugin_url() {
 }
 
 
+require_once 'admin/admin.php';
+
+
 /**
  * The code that runs during plugin activation.
  */
 function nhsjobs_activate() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/activation.php';
+
+	NHS_JOBS\ADMIN\CustomPostType\add_opps_post_type();
+
+	NHS_JOBS\ADMIN\CustomTax\add_speciality_tax();
+	NHS_JOBS\ADMIN\CustomTax\add_location_tax();
+
+   require_once 'includes/activation.php';
+
 }
 
 function nhsjobs_deactivate() {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/deactivation.php';
+    require_once 'includes/deactivation.php';
 }
 
 
@@ -68,6 +78,8 @@ register_activation_hook( __FILE__, 'nhsjobs_activate' );
 register_deactivation_hook( __FILE__, 'nhsjobs_deactivate' );
 
 
-// require_once 'includes/terms.php';
 
-require_once 'admin/admin.php';
+
+// require_once 'includes/location-terms.php';
+
+
