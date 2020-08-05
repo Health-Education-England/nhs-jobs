@@ -5,15 +5,20 @@
     $url = get_query_var( $namespace . 'url' );
     $title = get_query_var( $namespace . 'title' ) ? get_query_var( $namespace . 'title' ) : 'Latest Vacancies';
     $linkTxt = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
-
-
+    $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
 
 ?>
 
 <section class="nhsuk-grid-row">
     <div class="nhsuk-width-container">
         <?php
-            $feed_vacancies = _fetchVacancies();
+            if( $type === 'jobs' ){
+                $feed_vacancies = _fetchVacancies();
+            }
+            elseif ( $type === 'opportunity' ) {
+                $feed_vacancies = create_oppertunities_array();
+            }
+            
             $homepage = false;
 
             if ($feed_vacancies && ($vacancies = $feed_vacancies->vacancy_details) && count($vacancies)) :

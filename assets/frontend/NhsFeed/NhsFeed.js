@@ -29,9 +29,15 @@ export default class NhsFeed extends Component {
                     isSet: false,
                     options: {},
                 },
+                job_location: {
+                    title: 'Location',
+                    isSet: false,
+                    options: {},
+                }
             },
             items: [],
             feed: [],
+            type: ''
         };
 
         this.onFiltersChange = this.onFiltersChange.bind(this);
@@ -71,7 +77,7 @@ export default class NhsFeed extends Component {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             },
-            body: 'action=' + this.props.feed.action + '&_wpnonce=' + this.props.feed.nonce.custom_nonce + '&feed=' + this.props.feed.feed,
+            body: 'action=' + this.props.feed.action + '&_wpnonce=' + this.props.feed.nonce.custom_nonce + '&feed=' + this.props.feed.feed + '&type=' + this.props.feed.type,
         }).then((json) => {
             const feed = json.vacancy_details;
 
@@ -86,7 +92,9 @@ export default class NhsFeed extends Component {
                 filters: filters,
                 items: vacancies,
                 feed: feed,
+                type: this.props.feed.type
             });
+
         }).catch((e) => {
             console.log(e);
         });
@@ -99,7 +107,7 @@ export default class NhsFeed extends Component {
 
         Object.entries(filters).map(([name, filter]) => {
             let options = filter.options;
-
+            
             // Object.entries(options).map(([key, option]) => (
             //     options[key] = formData.getAll(name).includes(key)
             // ));
@@ -133,6 +141,7 @@ export default class NhsFeed extends Component {
     }
 
     onFiltersChange(name, option, value) {
+
         let filtersChanged = false,
             { filters, pagination, feed } = this.state;
 

@@ -1,8 +1,9 @@
 <?php
 
-    $namespace = 'nhsjobs/jobsfeed/';
+    $namespace = 'nhsjobs/oppsfeed/';
+
     $inputurl = get_query_var( $namespace . 'url' );
-    $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
+
     
 
     $url = admin_url("admin-ajax.php");
@@ -12,7 +13,7 @@
     $css_path = '/public/css/jobs.frontend.css';
 
     wp_enqueue_script( 
-        'nhsjobfeedjs',  
+        'nhsoppsfeedjs',  
         _get_plugin_url() . $vacancy_path,
         array(),
         filemtime( _get_plugin_directory() . $vacancy_path ),
@@ -38,9 +39,9 @@
 <script>
     window.FEED = {
         url: "<?php echo esc_url( $url ) ?>",
-        action: 'fetchVacancies',
+        action: 'getoppertunities',
         nonce: "<?php echo $nonce ?>",
-        feed: "<?php echo $feed; ?>",
-        type: "<?php echo $type; ?>"
+        feed: "<?php echo $feed ?>",
+        type: "opportunity"
     };
 </script>

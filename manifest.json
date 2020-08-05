@@ -1,4 +1,5 @@
 {
+  "./admin/js/blocks.editor.css": "./public/css/jobs.frontend.css",
   "./admin/js/blocks.editor.js": "./admin/js/blocks.editor.js",
   "./public/js/vacancyFeed.js": "./public/js/vacancyFeed.js"
 }

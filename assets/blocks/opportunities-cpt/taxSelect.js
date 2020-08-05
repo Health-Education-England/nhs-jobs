@@ -7,8 +7,6 @@ const { dispatch } = wp.data;
 const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLabel, childAttribute, childTerms, childAttrName, childLabel, block, currentPost, term } ) => {
 
 
-	console.log( parentTerms );
-
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
 		// updates block attribites
@@ -16,6 +14,7 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 		dispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, { [ attribute ]: select } );
 
 		// checks whether this is a parent or child taxonomy
+		// If it is a child category make sure both parent and child category are updated to be selected
 		
 		let termIds = relationship ? [ parseInt( select ) ] : [ parseInt( select ), parseInt( parentAttribute ) ];		
 
@@ -72,14 +71,21 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 	        onChange={ ( select ) => { updateTaxonomy( select, parentAttrName, true ) } }
 	    />
 
-	    <SelectControl
-	        label={ childLabel }
-	        value={ childAttribute }
-	        options={ 
-				childSelect( childTerms )
-	        }
-	        onChange={ ( select ) => { updateTaxonomy( select, childAttrName, false ) } }
-	    />
+	    {
+	    	childAttribute && (
+
+	    		<SelectControl
+			        label={ childLabel }
+			        value={ childAttribute }
+			        options={ 
+						childSelect( childTerms )
+			        }
+			        onChange={ ( select ) => { updateTaxonomy( select, childAttrName, false ) } }
+			    />
+	    	)
+	    }
+
+	    
 
 
 	</div>
@@ -101,9 +107,9 @@ export default withSelect( ( select, ownProps ) => {
 		}
 
 		return {
-			parentTerms: select('core').getEntityRecords('taxonomy', 'nhs_location', parent_query ),
-			childTerms: select('core').getEntityRecords('taxonomy', 'nhs_location', child_query ),
-			block: select("core/editor").getSelectedBlock(),
+			parentTerms: select('core').getEntityRecords('taxonomy', ownProps.term, parent_query ),
+			childTerms: select('core').getEntityRecords('taxonomy', ownProps.term, child_query ),
+			block: select("core/block-editor").getSelectedBlock(),
 			currentPost: select( 'core/editor' ).getCurrentPost(),
 			ownProps: ownProps
 		}

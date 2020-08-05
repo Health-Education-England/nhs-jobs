@@ -9,8 +9,15 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { 
 	URLInputButton,
-	RichText
+	RichText,
+	InspectorControls
 } = wp.blockEditor;
+
+const {
+    PanelBody,
+    PanelRow,
+    SelectControl
+} = wp.components;
 
 // Register Block
 
@@ -36,6 +43,10 @@ export default registerBlockType(
 			linkTxt: {
 				type: 'string',
 				default: 'View all Vacancies'
+			},
+			type: {
+				type: 'string',
+				default: 'jobs'
 			}
 		},
 		supports: {
@@ -49,25 +60,55 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { url, title, linkTxt }, className, isSelected, setAttributes } = props;
-			const CardLength = [1, 2, 3];
+			const { attributes: { url, title, linkTxt, type }, setAttributes } = props;
+			const CardLength = [ 
+				{
+					title: 'Job Title',
+					details: {
+						Location: 'Job Location',
+						Salary: 'Job Salary'
+					}
+					
+				}, 
+				{
+					title: 'Job Title',
+					details: {
+						Location: 'Job Location',
+						Salary: 'Job Salary'
+					}
+				}, 
+				{
+					title: 'Job Title',
+					details: {
+						Location: 'Job Location',
+						Salary: 'Job Salary'
+					}
+				} 
+			];
 
-			function JobCard( props ) {
+			function JobCard( card ) {
+
 			  	return(
 			        <div className="nhsuk-grid-column-one-third">
 						<a className="nhsuk-promo__link-wrapper">
 	    					<div className="nhsuk-promo__content">
-	        					<h3 className="nhsuk-promo__heading">Job Title {props.i }</h3>
+	        					<h3 className="nhsuk-promo__heading">{ card.job.title }</h3>
 
 			                    <dl className="nhsuk-summary-list">
-		                            <div className="nhsuk-summary-list__row">
-		                                <dt className="nhsuk-summary-list__key">Location</dt>
-		                                <dd className="nhsuk-summary-list__value">Job Location</dd>
-		                            </div>
-		                            <div className="nhsuk-summary-list__row">
-		                                <dt className="nhsuk-summary-list__key">Salary</dt>
-		                                <dd className="nhsuk-summary-list__value">Job Salary</dd>
-		                            </div>
+
+			                    	{ Object.entries( card.job.details ).map(( [ name, title ], key) => (
+			                            <div
+			                                key={key}
+			                                className="nhsuk-summary-list__row"
+			                            >
+			                                <dt className="nhsuk-summary-list__key">
+			                                    {title}
+			                                </dt>
+			                                <dd className="nhsuk-summary-list__value">
+			                                    {name}
+			                                </dd>
+			                            </div>
+			                        ))}
 			                    </dl>
 
 			                    <div className="nhsuk-action-link">
@@ -76,7 +117,7 @@ export default registerBlockType(
 			                                <path d="M0 0h24v24H0z" fill="none"></path>
 			                                <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
 			                            </svg>
-			                            <span className="nhsuk-action-link__text">View Vacancy</span>
+			                            <span className="nhsuk-action-link__text">{ card.btn }</span>
 			                        </span>
 			                    </div>
 			                </div>
@@ -85,7 +126,22 @@ export default registerBlockType(
 				);
 			}
 
-			return (
+			return [
+				<InspectorControls>
+		  			<PanelBody>
+		  				<PanelRow>
+		  					<SelectControl
+						        label="Size"
+						        value={ type }
+						        options={ [
+						            { label: 'NHS Jobs Feed', value: 'jobs' },
+						            { label: 'NHS Volunteering Feed', value: 'opportunity' },
+						        ] }
+						        onChange={ ( type ) => { setAttributes( { type } ) } }
+						    />
+		  				</PanelRow>
+		  			</PanelBody>
+		  		</InspectorControls>,
 				<section className="nhsuk-grid-row">
     				<div className="nhsuk-width-container">
     					<div className="nhsuk-grid__item nhsuk-grid-column-full">
@@ -96,8 +152,13 @@ export default registerBlockType(
 						/>
 		                <div className="nhsuk-grid-row nhsuk-promo-group homepage-vacancies">
 		                	{
-								CardLength.map((i, index) => {
-							        return <JobCard key={ index } />
+								CardLength.map((job, index) => {
+
+							        return <JobCard 
+							        			key={ index } 
+							        			job={ job }
+							        			btn='View Vacancy'
+							        		/>
 							      })
 		                	}
 		                    
@@ -126,7 +187,7 @@ export default registerBlockType(
 
 					</div>
 				</section>
-			);
+			];
 		},
 		save: props => {
 			const { attributes, className } = props;

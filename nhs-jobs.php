@@ -60,7 +60,6 @@ require_once 'admin/admin.php';
 function nhsjobs_activate() {
 
 	NHS_JOBS\ADMIN\CustomPostType\add_opps_post_type();
-
 	NHS_JOBS\ADMIN\CustomTax\add_speciality_tax();
 	NHS_JOBS\ADMIN\CustomTax\add_location_tax();
 
@@ -76,10 +75,5 @@ function nhsjobs_deactivate() {
 register_activation_hook( __FILE__, 'nhsjobs_activate' );
 
 register_deactivation_hook( __FILE__, 'nhsjobs_deactivate' );
-
-
-
-
-// require_once 'includes/location-terms.php';
 
 

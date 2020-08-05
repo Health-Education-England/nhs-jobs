@@ -17,17 +17,24 @@ export default class FeedForm extends Component {
     }
 
     handleEmployerSearch(event) {
+
         event.preventDefault();
         const {filters} = this.props;
         const job_employer_search = this.job_employer_search.current.value.toLowerCase();
-        let options = Object.entries(filters.job_employer.options).map(([name, option]) => {
-            option.show = name.toLowerCase().indexOf(job_employer_search) >= 0;
+
+        let options = Object.entries( filters.job_employer.options ).map(([name, option]) => {
+
+            option.show = name.toLowerCase().indexOf( job_employer_search ) >= 0;
+            
             return {[name]:option};
         });
+
         filters.job_employer.options = Object.assign(...options);
+
         this.setState({
             filters: filters,
         });
+
     }
 
     render() {

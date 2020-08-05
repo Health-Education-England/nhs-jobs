@@ -1,3 +1,5 @@
+import './style.scss';
+
 import "./jobs-block";
 
 import "./jobs-cards";

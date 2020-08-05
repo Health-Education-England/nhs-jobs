@@ -7,7 +7,21 @@ import icon from './icon';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { URLInput } = wp.blockEditor;
+const { 
+	URLInput,
+	InspectorControls 
+} = wp.blockEditor;
+
+const {
+    PanelBody,
+    PanelRow,
+    SelectControl
+} = wp.components;
+
+const {
+    Fragment
+} = wp.element;
+
 
 // Register Block
 
@@ -25,6 +39,10 @@ export default registerBlockType(
 		attributes: {
 			url: {
 				type: 'string'
+			},
+			type: {
+				type: 'string',
+				default: 'jobs'
 			}
 		},
 		supports: {
@@ -38,18 +56,53 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { url }, className, isSelected, setAttributes } = props;
-			return (
+			const { attributes: { url, type }, className, isSelected, setAttributes } = props;
+			return [
+
+				<InspectorControls>
+					<PanelBody
+						title={ __( 'Feed Options', 'nhsjobs' ) }
+					>
+					<PanelRow>
+
+					<SelectControl
+				        label="Size"
+				        value={ type }
+				        options={ [
+				            { label: 'NHS Jobs Feed', value: 'jobs' },
+				            { label: 'NHS Volunteering Feed', value: 'opportunity' },
+				        ] }
+				        onChange={ ( type ) => { setAttributes( { type } ) } }
+				    />
+
+					</PanelRow>
+					</PanelBody>
+				</InspectorControls>,
 				<div className={ className } >
-					<h3>{ __('Add feed from the NHS jobs site in here:', 'nhsjobs' ) }</h3>
-					<URLInput
-						placeholder={ __( "Add NHS feed URL", "_vt" ) }
-						onChange={ url => setAttributes( { url } ) }
-						value={ url }
-					/>
-					<p>{ __('If you leave this field blank the feed will default to: https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title') } </p>
+
+					{
+						type == 'jobs' ? (
+							<Fragment>
+								<h3>{ __('NHS Jobs Feed:', 'nhsjobs' ) }</h3>
+								<URLInput
+									placeholder={ __( "Add NHS feed URL", "_vt" ) }
+									onChange={ url => setAttributes( { url } ) }
+									value={ url }
+								/>
+								<p>{ __('If you leave this field blank the feed will default to: https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title') } </p>
+							</Fragment>
+
+						):(
+							<Fragment>
+								<h3>{ __('NHS Oppertunities Feed:', 'nhsjobs' ) }</h3>
+								<p>{ __('Oppertunities feed imported from this website') } </p>
+							</Fragment>
+						)
+					}
+
+					
 				</div>
-			);
+			];
 		},
 		save: props => {
 			const { attributes, className } = props;

@@ -1,6 +1,8 @@
 <?php foreach($vacancies as $key=>$vacancy) :?>
 
-    <?php if($key > 2) : break; endif; ?>
+    <?php if($key > 2) : break; endif; 
+        $details = $type === 'jobs' ? ["job_location", "job_salary"] : ["job_location", "job_staff_group"];
+    ?>
         <div class="<?php if (!isset($homepage)) :?>nhsuk-grid-column-one-third nhsuk-promo<?php else: ?>nhsuk-grid-column-one-third nhsuk-promo-group__item<?php endif; ?>" data-id="<?php echo $vacancy->id ?>">
             <a class="nhsuk-promo__link-wrapper" href="<?php echo $vacancy->job_url ?>" target="_blank">
                 <div class="nhsuk-promo__content">
@@ -8,7 +10,7 @@
 
                     <?php /* "job_type", "job_employer", "job_staff_group",  "job_postdate", "job_staff_group", "job_employer" */ ?>
                     <dl class="nhsuk-summary-list">
-                        <?php foreach(["job_location", "job_salary"] as $summary) :?>
+                        <?php foreach( $details as $summary) :?>
                             <div class="nhsuk-summary-list__row">
                                 <dt class="nhsuk-summary-list__key"><?php echo ucfirst(str_replace(['job_', '_'], ['', ' '], $summary)); ?></dt>
                                 <dd class="nhsuk-summary-list__value"><?php echo $vacancy->{$summary}; ?></dd>

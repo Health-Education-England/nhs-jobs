@@ -36,7 +36,7 @@ function add_speciality_tax() {
 	);
 	$args = array(
 		'labels'                     => $labels,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 		'public'                     => true,
 		'show_ui'                    => true,
 		'show_admin_column'          => true,
@@ -86,7 +86,7 @@ function add_location_tax() {
 		'labels'                     => $labels,
 		'hierarchical'               => true,
 		'public'                     => true,
-		'show_ui'                    => true,
+		'show_ui'                    => false,
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => false,
@@ -132,7 +132,7 @@ function add_partners_tax() {
 	);
 	$args = array(
 		'labels'                     => $labels,
-		'hierarchical'               => true,
+		'hierarchical'               => false,
 		'public'                     => true,
 		'show_ui'                    => true,
 		'show_admin_column'          => true,

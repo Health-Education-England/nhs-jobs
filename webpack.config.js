@@ -2,8 +2,11 @@ const path = require('path'),
     webpack = require('webpack'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     { CleanWebpackPlugin } = require('clean-webpack-plugin'),
-    ManifestPlugin = require('webpack-manifest-plugin')
+    ManifestPlugin = require('webpack-manifest-plugin'),
+    MiniCssExtractPlugin = require('mini-css-extract-plugin')
 ;
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = (env, argv) => {
 
@@ -44,6 +47,9 @@ module.exports = (env, argv) => {
         plugins = [
             new ManifestPlugin(),
             new webpack.HashedModuleIdsPlugin(),
+            new MiniCssExtractPlugin({
+              filename: './public/css/jobs.frontend.css',
+            })
         ]
     ;
 
@@ -71,6 +77,20 @@ module.exports = (env, argv) => {
         module: {
             rules: [
                 babelConfig,
+                {
+                    test: /\.(sa|sc|c)ss$/,
+                    use: [
+                      {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                          hmr: process.env.NODE_ENV === 'development',
+                        },
+                      },
+                      'css-loader',
+                      'postcss-loader',
+                      'sass-loader',
+                    ]
+                }
             ],
         },
         plugins: plugins,

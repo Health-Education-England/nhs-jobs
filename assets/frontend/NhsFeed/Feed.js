@@ -9,7 +9,8 @@ export default function Feed(props) {
         filters,
         pagination,
         items,
-        onFiltersChange
+        onFiltersChange,
+        type
     } = props;
 
     return (
@@ -34,7 +35,8 @@ export default function Feed(props) {
                 )}
                 {items.map((item, key) => (
                     <FeedListing key={key}
-                                 item={item} />
+                                 item={item}
+                                 type={type} />
                 ))}
                 <FeedPagination pagination={pagination}
                                 onFiltersChange={onFiltersChange}

@@ -2,15 +2,34 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 export default function FeedListing(props) {
-    const { item } = props;
-    const attributes = {
-        job_type: 'Type',
-        job_salary: 'Salary',
-        job_location: 'Location',
-        job_staff_group: 'Staff group',
-        job_employer: 'Employer',
-        job_closedate: 'Close date',
-    };
+    const { item, type } = props;
+    console.log( props );
+
+    let attributes = {};
+
+    if( type == 'opportunity' ){
+
+        attributes = {
+            job_location: 'Location',
+            job_staff_group: 'Speciality',
+            job_employer: 'Partner',
+            job_closedate: 'Close date',
+        };
+
+    }else{
+
+        attributes = {
+            job_type: 'Type',
+            job_salary: 'Salary',
+            job_location: 'Location',
+            job_staff_group: 'Staff group',
+            job_employer: 'Employer',
+            job_closedate: 'Close date',
+        };
+
+    }
+
+    
 
     return (
         <div className="nhsuk-grid-column-full-width nhsuk-promo"

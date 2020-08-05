@@ -39,6 +39,12 @@ export default registerBlockType(
 			},
 			country: {
 				type: 'string'
+			},
+			speciality: {
+				type: 'string'
+			},
+			partners: {
+				type: 'string'
 			}
 		},
 		supports: {
@@ -52,14 +58,18 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { end, location, country }, className, isSelected, setAttributes } = props;
+			const { attributes: { end, location, country, speciality, partners }, className, isSelected, setAttributes } = props;
+
 			return (
 				<div className={ className } >
+					<h2>{__('Post Meta', 'nhsjobs') }</h2>
+					<h3>{__('End Date', 'nhsjobs') }</h3>
 					<DateTimePicker
 			            currentDate={ end }
 			            onChange={ ( end ) => setAttributes( { end } ) }
 			            is12Hour={ true }
                     />
+                    <h3>{__('Location', 'nhsjobs') }</h3>
                     <NHSTaxSelect 
                     	parentAttribute={ location }
                     	childAttribute={ country }
@@ -69,7 +79,22 @@ export default registerBlockType(
                     	parentLabel='Continent'
                     	childLabel='Country'
                     />
-                    { console.log( location, country ) }
+                    <h3>{__('Speciality', 'nhsjobs') }</h3>
+                    <NHSTaxSelect 
+                    	parentAttribute={ speciality }
+                    	childAttribute={ null }
+                    	parentAttrName='speciality'
+                    	term='nhs_speciality'
+                    	parentLabel='Speciality'
+                    />
+                    <h3>{__('Partners', 'nhsjobs') }</h3>
+                    <NHSTaxSelect 
+                    	parentAttribute={ partners }
+                    	childAttribute={ null }
+                    	parentAttrName='partners'
+                    	term='nhs_partners'
+                    	parentLabel='Partners'
+                    />
 				</div>
 			);
 		},
