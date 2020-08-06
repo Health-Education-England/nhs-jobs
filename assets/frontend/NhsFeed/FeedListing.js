@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 export default function FeedListing(props) {
     const { item, type } = props;
-    console.log( props );
 
     let attributes = {};
 

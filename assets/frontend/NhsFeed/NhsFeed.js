@@ -32,7 +32,10 @@ export default class NhsFeed extends Component {
                 job_location: {
                     title: 'Location',
                     isSet: false,
-                    options: {},
+                    options: {
+                        continent: {},
+                        country: {}
+                    },                    
                 }
             },
             items: [],
@@ -80,19 +83,23 @@ export default class NhsFeed extends Component {
             body: 'action=' + this.props.feed.action + '&_wpnonce=' + this.props.feed.nonce.custom_nonce + '&feed=' + this.props.feed.feed + '&type=' + this.props.feed.type,
         }).then((json) => {
             const feed = json.vacancy_details;
+            const type = this.props.feed.type;
 
-            const filters = this.setFilterOptions(feed),
+            const filters = this.setFilterOptions( feed, type ),
                 { pagination } = this.state,
                 { vacancies, total_pages } = this.paginate(feed, pagination.page, pagination.per_page);
 
             pagination.total_pages = total_pages;
+
+            // console.log( feed );
+
             this.setState({
                 loaded: true,
                 pagination: pagination,
                 filters: filters,
                 items: vacancies,
                 feed: feed,
-                type: this.props.feed.type
+                type: type
             });
 
         }).catch((e) => {
@@ -100,13 +107,40 @@ export default class NhsFeed extends Component {
         });
     }
 
-    setFilterOptions(feed) {
-        let filters = this.state.filters;
+    setFilterOptions(feed, type) {
+        let { filters } = this.state,
+        neededFilers=[];
+
+        if( type == 'jobs' ){
+            neededFilers = [
+                'job_type',
+                'job_employer',
+                'job_staff_group',
+            ];
+        }
+
+        if( type == 'opportunity' ){
+            neededFilers = [
+                'job_employer',
+                'job_location',
+                'job_staff_group'
+            ];
+        }
+
+        // console.log( feed );
+
 
         // formData = new FormData(event.target.form);
 
         Object.entries(filters).map(([name, filter]) => {
+
+
+            if( ! neededFilers.includes(name) ) return;
+
+
             let options = filter.options;
+
+            // console.log( name, filter );
             
             // Object.entries(options).map(([key, option]) => (
             //     options[key] = formData.getAll(name).includes(key)
@@ -114,18 +148,26 @@ export default class NhsFeed extends Component {
 
             // set all options to false
             feed.map((item) => {
+
+                let isObj = typeof item[name] === 'object' && item[name] !== null
+
+                console.log( item );
+                console.log( name, filter );
+                // console.log( isObj );
+
                 options[item[name]] = {
                     checked: false,
                     show: true,
                 };
+               
             });
 
-            const ordered = {};
-            Object.keys(options).sort().forEach(function(key) {
-                ordered[key] = options[key];
-            });
+            // const ordered = {};
+            // Object.keys(options).sort().forEach(function(key) {
+            //     ordered[key] = options[key];
+            // });
 
-            filters[name].options = ordered;
+            // filters[name].options = ordered;
         });
 
         return filters;
@@ -144,6 +186,8 @@ export default class NhsFeed extends Component {
 
         let filtersChanged = false,
             { filters, pagination, feed } = this.state;
+
+            //console.log( this.state, name, option, value );
 
         // filter or paginate
         if (name === 'pagination') {
@@ -192,6 +236,8 @@ export default class NhsFeed extends Component {
             filters: filters,
             items: vacancies,
         });
+
+        console.log( filteredVacancies );
     }
 
     render() {

@@ -39,6 +39,7 @@ function nhsjobfeed_shortcode( $atts, $content = null ){
         action: 'fetchVacancies',
         nonce: '$nonce',
         feed: '$feed',
+        type: "jobs"
     };
 </script>
 EOT;

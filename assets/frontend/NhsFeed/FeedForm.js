@@ -6,6 +6,7 @@ export default class FeedForm extends Component {
     constructor(props) {
         super(props);
         this.job_employer_search = React.createRef();
+        this.job_location_search = React.createRef();
 
         const { filters } = this.props;
 
@@ -16,13 +17,13 @@ export default class FeedForm extends Component {
         this.handleEmployerSearch = this.handleEmployerSearch.bind(this);
     }
 
-    handleEmployerSearch(event) {
-
+    handleEmployerSearch( name, event ) {
         event.preventDefault();
+        let search_name = name + '_search'
         const {filters} = this.props;
-        const job_employer_search = this.job_employer_search.current.value.toLowerCase();
+        const job_employer_search = this[search_name].current.value.toLowerCase();
 
-        let options = Object.entries( filters.job_employer.options ).map(([name, option]) => {
+        let options = Object.entries( filters[name].options ).map(([name, option]) => {
 
             option.show = name.toLowerCase().indexOf( job_employer_search ) >= 0;
             
@@ -37,12 +38,22 @@ export default class FeedForm extends Component {
 
     }
 
+    isEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
     render() {
-        const { onFiltersChange } = this.props;
+        const { onFiltersChange, type } = this.props;
 
         return (
             <form action="#">
-            {Object.entries(this.state.filters).map(([name, filter]) => (
+            {Object.entries(this.state.filters).map(([name, filter]) => {
+
+                let empty = ! this.isEmpty( filter.options );
+
+                if( empty ){
+
+               return(
                 <fieldset key={name}
                     className="nhsuk-fieldset nhsuk-expander-group"
                     aria-labelledby={"details-label-" + name}>
@@ -54,18 +65,30 @@ export default class FeedForm extends Component {
                             <legend className="nhsuk-fieldset__legend nhsuk-details__summary-text" id={"details-label-" + name}>{filter.title}</legend>
                         </summary>
                         <div className="nhsuk-details__text" id={"details-content-" + name} aria-hidden="false">
-                            {name === 'job_employer' && (
+                            {  name === 'job_employer'  && (
                                 <span className="nhsuk-hint">
                                     <input type="text"
                                        className="nhsuk-input"
                                        placeholder="Search Employer"
                                        aria-label="Search Employer"
                                        ref={this.job_employer_search}
-                                       onChange={this.handleEmployerSearch}
+                                       onChange={ ( event ) => { this.handleEmployerSearch( name, event ) } }
+                                    />
+                                </span>
+                            )}
+                            {  name === 'job_location'  && (
+                                <span className="nhsuk-hint">
+                                    <input type="text"
+                                       className="nhsuk-input"
+                                       placeholder="Search Locations"
+                                       aria-label="Search Locations"
+                                       ref={this.job_location_search}
+                                       onChange={ ( event ) => { this.handleEmployerSearch( name, event ) } }
                                     />
                                 </span>
                             )}
                             <div className="nhsuk-checkboxes">
+                            {console.log(filter)}
                                 {Object.entries(filter.options).map(([option, checked], key) => (
                                     <div key={name + key}
                                          className={`nhsuk-checkboxes__item ${!checked.show && !checked.checked ? 'hidden' : checked.checked ? 'checked' : ''}
@@ -88,7 +111,9 @@ export default class FeedForm extends Component {
                         </div>
                     </details>
                 </fieldset>
-            ))}
+            )}
+            })
+            }
             </form>
         );
     }

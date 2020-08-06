@@ -37,7 +37,7 @@ function create_oppertunities_array(){
 			// 						'continent' => esc_html( $location[0]->name ),
 			// 						'country'   => esc_html( $location[1]->name )
 			// 					),
-			'job_location'    => esc_html( $location[0]->name ),
+			'job_location'    => esc_html( $location[0]->name . $location[1]->name ),
 			'job_closedate'   => esc_html( date('d/m/Y', $time ) ),
 			'job_postdate'    => get_the_date( 'd/m/Y', $id ),
 			'job_staff_group' => esc_html( $speciality->name ),
