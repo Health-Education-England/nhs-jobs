@@ -6,7 +6,7 @@ export default class FeedForm extends Component {
     constructor(props) {
         super(props);
         this.job_employer_search = React.createRef();
-        this.job_location_search = React.createRef();
+        this.job_country_search = React.createRef();
 
         const { filters } = this.props;
 
@@ -69,26 +69,25 @@ export default class FeedForm extends Component {
                                 <span className="nhsuk-hint">
                                     <input type="text"
                                        className="nhsuk-input"
-                                       placeholder="Search Employer"
-                                       aria-label="Search Employer"
+                                       placeholder={`Search ${filter.title}`}
+                                       aria-label={`Search ${filter.title}`}
                                        ref={this.job_employer_search}
                                        onChange={ ( event ) => { this.handleEmployerSearch( name, event ) } }
                                     />
                                 </span>
                             )}
-                            {  name === 'job_location'  && (
+                            {  name === 'job_country'  && (
                                 <span className="nhsuk-hint">
                                     <input type="text"
                                        className="nhsuk-input"
-                                       placeholder="Search Locations"
-                                       aria-label="Search Locations"
-                                       ref={this.job_location_search}
+                                       placeholder={`Search ${filter.title}`}
+                                       aria-label={`Search ${filter.title}`}
+                                       ref={this.job_country_search}
                                        onChange={ ( event ) => { this.handleEmployerSearch( name, event ) } }
                                     />
                                 </span>
                             )}
                             <div className="nhsuk-checkboxes">
-                            {console.log(filter)}
                                 {Object.entries(filter.options).map(([option, checked], key) => (
                                     <div key={name + key}
                                          className={`nhsuk-checkboxes__item ${!checked.show && !checked.checked ? 'hidden' : checked.checked ? 'checked' : ''}

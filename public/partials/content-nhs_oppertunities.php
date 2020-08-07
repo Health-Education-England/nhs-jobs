@@ -91,6 +91,19 @@
 
 	</div>
 
+	<?php 
+
+	$partner_txt = term_description( $partner->term_id );
+
+	if( $partner_txt ): ?>
+
+		<div class="nhsuk-panel nhsuk-u-margin-bottom-4 nhsuk-u-margin-top-5">
+			<h3><?php echo __('About ', 'nhsjobs') . $partner->name; ?> </h3>
+			<?php echo wp_kses_post( $partner_txt ); ?>
+		</div>
+
+	<?php endif; ?>
+
 	<article>
 		<?php
 		the_content(

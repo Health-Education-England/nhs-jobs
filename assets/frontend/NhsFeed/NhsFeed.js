@@ -30,12 +30,14 @@ export default class NhsFeed extends Component {
                     options: {},
                 },
                 job_location: {
-                    title: 'Location',
+                    title: 'Region',
                     isSet: false,
-                    options: {
-                        continent: {},
-                        country: {}
-                    },                    
+                    options: {},                    
+                },
+                job_country: {
+                    title: 'Country',
+                    isSet: false,
+                    options: {},                    
                 }
             },
             items: [],
@@ -91,8 +93,6 @@ export default class NhsFeed extends Component {
 
             pagination.total_pages = total_pages;
 
-            // console.log( feed );
-
             this.setState({
                 loaded: true,
                 pagination: pagination,
@@ -123,11 +123,14 @@ export default class NhsFeed extends Component {
             neededFilers = [
                 'job_employer',
                 'job_location',
+                'job_country',
                 'job_staff_group'
             ];
-        }
 
-        // console.log( feed );
+
+            filters.job_employer.title = 'Partners'
+
+        }
 
 
         // formData = new FormData(event.target.form);
@@ -139,9 +142,7 @@ export default class NhsFeed extends Component {
 
 
             let options = filter.options;
-
-            // console.log( name, filter );
-            
+           
             // Object.entries(options).map(([key, option]) => (
             //     options[key] = formData.getAll(name).includes(key)
             // ));
@@ -149,26 +150,24 @@ export default class NhsFeed extends Component {
             // set all options to false
             feed.map((item) => {
 
-                let isObj = typeof item[name] === 'object' && item[name] !== null
+                if( item[name].length > 0 ){
 
-                console.log( item );
-                console.log( name, filter );
-                // console.log( isObj );
-
-                options[item[name]] = {
-                    checked: false,
-                    show: true,
-                };
+                    options[item[name]] = {
+                        checked: false,
+                        show: true,
+                    };
+                }
                
             });
 
-            // const ordered = {};
-            // Object.keys(options).sort().forEach(function(key) {
-            //     ordered[key] = options[key];
-            // });
+            const ordered = {};
+            Object.keys(options).sort().forEach(function(key) {
+                ordered[key] = options[key];
+            });
 
-            // filters[name].options = ordered;
+            filters[name].options = ordered;
         });
+
 
         return filters;
     }
