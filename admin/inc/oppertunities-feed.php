@@ -24,6 +24,17 @@ function create_oppertunities_array(){
 		$partner = get_the_terms( $id, 'nhs_partners' )[0];
 		$location = get_the_terms( $id, 'nhs_location' );
 		$speciality = get_the_terms( $id, 'nhs_speciality' )[0];
+		$continent = '';
+		$country = '';
+
+		foreach ( $location as $place ) {
+			if( $place->parent > 0 ):
+				$country = $place->name;				
+			else:
+				$continent = $place->name;
+			endif;
+		}
+
 
 		$post_data = array(
 			'id'              => $id,
@@ -37,14 +48,13 @@ function create_oppertunities_array(){
 			// 						'continent' => esc_html( $location[0]->name ),
 			// 						'country'   => esc_html( $location[1]->name )
 			// 					),
-			'job_location'    => esc_html( $location[0]->name . $location[1]->name ),
+			'job_location'    => esc_html( $continent ),
+			'job_country'     => esc_html( $country ),
 			'job_closedate'   => esc_html( date('d/m/Y', $time ) ),
 			'job_postdate'    => get_the_date( 'd/m/Y', $id ),
 			'job_staff_group' => esc_html( $speciality->name ),
 			'job_url'         => esc_url( get_the_permalink( $id ) )
 		);
-
- 		// $posts_array = array_merge( $posts_array, array( "vacancy_details"=> $post_data ) );
 
 		array_push( $vacancies, $post_data );
 
