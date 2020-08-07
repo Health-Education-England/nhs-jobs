@@ -52,6 +52,9 @@ export default function FeedListing(props) {
                                 </dt>
                                 <dd className="nhsuk-summary-list__value">
                                     {item[name]}
+                                    { name == 'job_location' && (
+                                        <span>{ ` - ${item['job_country']}`}</span>
+                                    )}
                                 </dd>
                             </div>
                         ))}
