@@ -39,7 +39,7 @@ function add_opps_post_type() {
 		'description'           => __( 'Opportunities', 'nhsjobs' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'page-attributes', 'custom-fields' ),
-		'taxonomies'            => array('vt_categories'), // !important add any other Cats in here
+		'taxonomies'            => array('nhs_speciality', 'nhs_location', 'nhs_partners'),
 		'hierarchical'          => true,
 		'public'                => true,
 		'show_ui'               => true,
@@ -56,9 +56,8 @@ function add_opps_post_type() {
 		'capability_type'       => 'page',
 		'show_in_rest'          =>  true,
 		'template'              => [
-			[ 'core/heading', [] ]
+			[ 'nhsjobs/opportunites', [] ]
 		],
-		// 'template_lock'        => 'all',
 	);
 
 	register_post_type( 'nhs_opportunities', $args );
