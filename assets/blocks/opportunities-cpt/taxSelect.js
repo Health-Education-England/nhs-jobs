@@ -6,6 +6,8 @@ const { dispatch } = wp.data;
 
 const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLabel, childAttribute, childTerms, childAttrName, childLabel, block, currentPost, term } ) => {
 
+	// console.log( parentAttrName, childTerms );
+
 
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
@@ -72,7 +74,7 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 	    />
 
 	    {
-	    	childAttribute && (
+	    	childSelect && (
 
 	    		<SelectControl
 			        label={ childLabel }
@@ -106,9 +108,11 @@ export default withSelect( ( select, ownProps ) => {
 			'per_page'   : -1
 		}
 
+		let childTerms = ownProps.childAttrName ? select('core').getEntityRecords('taxonomy', ownProps.term, child_query ) : false;
+
 		return {
 			parentTerms: select('core').getEntityRecords('taxonomy', ownProps.term, parent_query ),
-			childTerms: select('core').getEntityRecords('taxonomy', ownProps.term, child_query ),
+			childTerms: childTerms,
 			block: select("core/block-editor").getSelectedBlock(),
 			currentPost: select( 'core/editor' ).getCurrentPost(),
 			ownProps: ownProps

@@ -82,7 +82,7 @@ export default registerBlockType(
                     <h3>{__('Speciality', 'nhsjobs') }</h3>
                     <NHSTaxSelect 
                     	parentAttribute={ speciality }
-                    	childAttribute={ null }
+                    	childAttrName={ false }
                     	parentAttrName='speciality'
                     	term='nhs_speciality'
                     	parentLabel='Speciality'
@@ -90,7 +90,7 @@ export default registerBlockType(
                     <h3>{__('Partners', 'nhsjobs') }</h3>
                     <NHSTaxSelect 
                     	parentAttribute={ partners }
-                    	childAttribute={ null }
+                    	childAttrName={ false }
                     	parentAttrName='partners'
                     	term='nhs_partners'
                     	parentLabel='Partners'
