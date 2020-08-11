@@ -15,7 +15,7 @@ function register_block_assets() {
 
 	// Make paths variables so we don't write em twice ;)
 	$editor_js_path = '/admin/js/blocks.editor.js';
-	$editor_style_path = '/admin/css/blocks.editor.css';
+	$editor_style_path = '/admin/css/jobs.backend.css';
 
 	// Register the bundled block JS file
 	wp_enqueue_script(
@@ -27,11 +27,11 @@ function register_block_assets() {
 	);
 
 	// Register editor only styles
-	// wp_register_style(
-	// 	'nhsjobs-editor-css',
-	// 	_get_plugin_url() . $editor_style_path,
-	// 	[],
-	// 	filemtime( _get_plugin_directory() . $editor_style_path )
-	// );
+	wp_enqueue_style(
+		'nhsjobs-editor-css',
+		_get_plugin_url() . $editor_style_path,
+		[],
+		filemtime( _get_plugin_directory() . $editor_style_path )
+	);
 
 }

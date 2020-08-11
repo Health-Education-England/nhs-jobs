@@ -1,5 +1,8 @@
 {
-  "./admin/js/blocks.editor.css": "./public/css/jobs.frontend.css",
+  "./admin/css/jobs.backend.css": "./admin/css/jobs.backend.css",
+  "./admin/css/jobs.backend.js": "./admin/css/jobs.backend.js",
   "./admin/js/blocks.editor.js": "./admin/js/blocks.editor.js",
+  "./public/css/jobs.frontend.css": "./public/css/jobs.frontend.css",
+  "./public/css/jobs.frontend.js": "./public/css/jobs.frontend.js",
   "./public/js/vacancyFeed.js": "./public/js/vacancyFeed.js"
 }

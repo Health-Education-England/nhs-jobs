@@ -7,6 +7,15 @@
     $linkTxt = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
     $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
 
+    $css_path = '/public/css/jobs.frontend.css';
+
+    wp_enqueue_style( 
+        'nhsoppscss',  
+        _get_plugin_url() . $css_path,
+        array(),
+        filemtime( _get_plugin_directory() . $css_path )
+    );
+
 ?>
 
 <section class="nhsuk-grid-row">
@@ -14,9 +23,11 @@
         <?php
             if( $type === 'jobs' ){
                 $feed_vacancies = _fetchVacancies();
+                $title = 'Vacancy';
             }
             elseif ( $type === 'opportunity' ) {
                 $feed_vacancies = create_oppertunities_array();
+                $title = 'Opportunity';
             }
             
             $homepage = false;

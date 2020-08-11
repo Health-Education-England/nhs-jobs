@@ -63,38 +63,44 @@ export default registerBlockType(
 			return (
 				<div className={ className } >
 					<h2>{__('Post Meta', 'nhsjobs') }</h2>
-					<h3>{__('End Date', 'nhsjobs') }</h3>
-					<DateTimePicker
-			            currentDate={ end }
-			            onChange={ ( end ) => setAttributes( { end } ) }
-			            is12Hour={ true }
-                    />
-                    <h3>{__('Location', 'nhsjobs') }</h3>
-                    <NHSTaxSelect 
-                    	parentAttribute={ location }
-                    	childAttribute={ country }
-                    	parentAttrName='location'
-                    	childAttrName='country'
-                    	term='nhs_location'
-                    	parentLabel='Continent'
-                    	childLabel='Country'
-                    />
-                    <h3>{__('Speciality', 'nhsjobs') }</h3>
-                    <NHSTaxSelect 
-                    	parentAttribute={ speciality }
-                    	childAttrName={ false }
-                    	parentAttrName='speciality'
-                    	term='nhs_speciality'
-                    	parentLabel='Speciality'
-                    />
-                    <h3>{__('Partners', 'nhsjobs') }</h3>
-                    <NHSTaxSelect 
-                    	parentAttribute={ partners }
-                    	childAttrName={ false }
-                    	parentAttrName='partners'
-                    	term='nhs_partners'
-                    	parentLabel='Partners'
-                    />
+					<div className="columns">
+						<div className="col-1">
+							<h3>{__('End Date', 'nhsjobs') }</h3>
+							<DateTimePicker
+					            currentDate={ end }
+					            onChange={ ( end ) => setAttributes( { end } ) }
+					            is12Hour={ true }
+		                    />
+		                </div>
+		                <div className="col-1">
+		                    <h3>{__('Location', 'nhsjobs') }</h3>
+		                    <NHSTaxSelect 
+		                    	parentAttribute={ location }
+		                    	childAttribute={ country }
+		                    	parentAttrName='location'
+		                    	childAttrName='country'
+		                    	term='nhs_location'
+		                    	parentLabel='Continent'
+		                    	childLabel='Country'
+		                    />
+		                    <h3>{__('Speciality', 'nhsjobs') }</h3>
+		                    <NHSTaxSelect 
+		                    	parentAttribute={ speciality }
+		                    	childAttrName={ false }
+		                    	parentAttrName='speciality'
+		                    	term='nhs_speciality'
+		                    	parentLabel='Speciality'
+		                    />
+		                    <h3>{__('Partners', 'nhsjobs') }</h3>
+		                    <NHSTaxSelect 
+		                    	parentAttribute={ partners }
+		                    	childAttrName={ false }
+		                    	parentAttrName='partners'
+		                    	term='nhs_partners'
+		                    	parentLabel='Partners'
+		                    />
+		                </div>
+                    </div>
 				</div>
 			);
 		},

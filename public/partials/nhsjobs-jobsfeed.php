@@ -39,7 +39,7 @@
 <script>
     window.FEED = {
         url: "<?php echo esc_url( $url ) ?>",
-        action: 'fetchVacancies',
+        action: "<?php echo 'fetchVacancies' ?>",
         nonce: "<?php echo $nonce ?>",
         feed: "<?php echo $feed; ?>",
         type: "<?php echo $type; ?>"

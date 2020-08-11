@@ -3,6 +3,7 @@ const path = require('path'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     { CleanWebpackPlugin } = require('clean-webpack-plugin'),
     ManifestPlugin = require('webpack-manifest-plugin'),
+    IgnoreEmitWebPackPlugin = require( 'ignore-emit-webpack-plugin' ),
     MiniCssExtractPlugin = require('mini-css-extract-plugin')
 ;
 
@@ -47,8 +48,10 @@ module.exports = (env, argv) => {
         plugins = [
             new ManifestPlugin(),
             new webpack.HashedModuleIdsPlugin(),
+            new IgnoreEmitWebPackPlugin( [ 'jobs.backend.js', 'jobs.frontend.js' ] ),
             new MiniCssExtractPlugin({
-              filename: './public/css/jobs.frontend.css',
+              filename: '[name].css',
+              chunkFilename: '[id].css'
             })
         ]
     ;
@@ -68,7 +71,9 @@ module.exports = (env, argv) => {
         context: path.resolve(__dirname),
         entry: {
             "./admin/js/blocks.editor": "./assets/blocks/index.js",
-            "./public/js/vacancyFeed": "./assets/frontend/vacancy.js"
+            "./public/js/vacancyFeed": "./assets/frontend/vacancy.js",
+            "./public/css/jobs.frontend": './assets/blocks/style.scss',
+            "./admin/css/jobs.backend": './assets/blocks/editor.scss'
         },
         output: {
             path: path.resolve(__dirname),

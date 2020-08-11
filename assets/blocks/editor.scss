@@ -1,0 +1,80 @@
+.wp-block-nhsjobs-opportunites{
+	border: 1px solid black;
+	background-color: rgba( 255, 255, 255, 0.3 );
+	padding: 20px;
+
+	.editor-styles-wrapper & {
+		h2{
+			margin-top: 0;
+			padding-bottom: 10px;
+			border-bottom: 1px solid black;
+		}
+
+		h3{
+			margin-top: 1rem;
+			margin-bottom: 2rem;
+		}
+	}
+
+
+	.DayPicker{
+		width: 320px !important;
+
+		& > div > div{
+			width: 320px !important;
+		}
+	}
+	.components-datetime__date{
+		width: 320px;
+	}
+	.components-datetime .components-datetime__date-help-button{
+		margin-left: 0;
+	}
+	.components-datetime{
+		padding: 0;
+	}
+	.DayPicker_transitionContainer{
+		width: 320px !important;
+		height: 360px !important;
+	}
+	.DayPicker_weekHeader{
+		width: 100%;
+	}
+	.DayPicker_weekHeader_ul{
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.DayPicker_weekHeader_li{
+		width: auto !important;
+		flex: 1;
+		display: flex;
+	}
+	td.CalendarDay{
+		width: 40px !important;
+		height: 40px !important;
+		padding: 0px;
+		vertical-align: middle;
+		border-radius: 0;
+	}
+
+	.columns{
+		@media screen and ( min-width: 1300px ) {
+			display: flex;
+		}
+	}
+
+	.col-1{
+		@media screen and ( min-width: 1300px ) {
+			flex-basis: 50%;
+		}		
+	}
+
+	.components-base-control .components-base-control__field{
+		display: flex;
+
+		label{
+			flex-basis: 80px;
+		}
+	}
+}
