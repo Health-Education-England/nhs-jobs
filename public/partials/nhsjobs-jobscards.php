@@ -14,7 +14,7 @@
         _get_plugin_url() . $css_path,
         array(),
         filemtime( _get_plugin_directory() . $css_path )
-    );
+    ); 
 
 ?>
 
@@ -22,11 +22,11 @@
     <div class="nhsuk-width-container">
         <?php
             if( $type === 'jobs' ){
-                $feed_vacancies = _fetchVacancies();
+                $feed_vacancies = NHS_JOBS\ADMIN\Feed\_fetchVacancies();
                 $title = 'Vacancy';
             }
             elseif ( $type === 'opportunity' ) {
-                $feed_vacancies = create_oppertunities_array();
+                $feed_vacancies = NHS_JOBS\ADMIN\Feed\create_oppertunities_array();
                 $title = 'Opportunity';
             }
             
