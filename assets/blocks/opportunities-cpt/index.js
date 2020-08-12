@@ -11,18 +11,31 @@ const { registerBlockType } = wp.blocks;
 const { URLInput } = wp.blockEditor;
 const { DateTimePicker, ToggleControl } = wp.components;
 
+
+// De-Registers this block if the post type is not the Oppertunities
+
+wp.domReady( function() {
+
+  const postType = wp.data.select('core/editor').getCurrentPostType();
+
+  if( postType !== 'nhs_opportunities' ){
+  	wp.blocks.unregisterBlockType( 'nhsjobs/opportunites' );
+  }
+
+} );
+
+
 // Register Block
 
 export default registerBlockType(
 	'nhsjobs/opportunites',
 	{
-		title: __('Opportunites', 'nhsjobs' ),
-		description: __('Add a feed from the NHS jobs site.', 'nhsjobs' ),
+		title: __('Opportunities', 'nhsjobs' ),
+		description: __('Add meta data to the post', 'nhsjobs' ),
 		category: 'nhsblocks',
 		icon: icon,
 		keywords: [
-			__( 'Jobs listings list', 'nhsjobs' ),
-			__( 'Feed Vacencies Nursing', 'nhsjobs' ),
+			__( 'Opportunities Meta Information', 'nhsjobs' ),
 		],
 		attributes: {
 			url: {
@@ -55,7 +68,7 @@ export default registerBlockType(
 			html: false, // allow the html to be edited
 			inserter: true, // set to false if you don't want the block to be insertable
 			multiple: false, // allows more than one block of that type on the page
-			reusable: true, // whether block is allowed to be a reusable block
+			reusable: false, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
 			const { attributes: { end, location, country, speciality, partners }, className, isSelected, setAttributes } = props;

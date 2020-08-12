@@ -29,12 +29,12 @@ export default registerBlockType(
 	'nhsjobs/jobsfeed',
 	{
 		title: __('Jobs Block', 'nhsjobs' ),
-		description: __('Add a feed from the NHS jobs site.', 'nhsjobs' ),
+		description: __('Add a feed from the NHS jobs site or the Opportunities Custom Post Type', 'nhsjobs' ),
 		category: 'nhsblocks',
 		icon: icon,
 		keywords: [
-			__( 'Jobs listings list', 'nhsjobs' ),
-			__( 'Feed Vacencies Nursing', 'nhsjobs' ),
+			__( 'Jobs listings list Opportunities', 'nhsjobs' ),
+			__( 'Feed Vacencies Nursing Volunteering Volunteers', 'nhsjobs' ),
 		],
 		attributes: {
 			url: {

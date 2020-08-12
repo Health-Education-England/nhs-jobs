@@ -6,8 +6,6 @@ const { dispatch } = wp.data;
 
 const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLabel, childAttribute, childTerms, childAttrName, childLabel, block, currentPost, term } ) => {
 
-	// console.log( parentAttrName, childTerms );
-
 
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
