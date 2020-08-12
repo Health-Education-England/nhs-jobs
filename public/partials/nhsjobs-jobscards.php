@@ -6,6 +6,7 @@
     $title = get_query_var( $namespace . 'title' ) ? get_query_var( $namespace . 'title' ) : 'Latest Vacancies';
     $linkTxt = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
     $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
+    $feed = get_query_var( $namespace . 'feed' ) ? get_query_var( $namespace . 'feed' ) : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title';
 
     $css_path = '/public/css/jobs.frontend.css';
 
@@ -22,7 +23,7 @@
     <div class="nhsuk-width-container">
         <?php
             if( $type === 'jobs' ){
-                $feed_vacancies = NHS_JOBS\ADMIN\Feed\_fetchVacancies();
+                $feed_vacancies = NHS_JOBS\ADMIN\Feed\_fetchVacancies( esc_url( $feed ) );
                 $title = 'Vacancy';
             }
             elseif ( $type === 'opportunity' ) {
