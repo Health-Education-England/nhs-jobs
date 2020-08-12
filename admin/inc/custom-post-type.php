@@ -3,7 +3,7 @@
 namespace NHS_JOBS\ADMIN\CustomPostType;
 
 
-add_action( 'init', __NAMESPACE__ . '\add_opps_post_type', 0 );
+add_action( 'init', __NAMESPACE__ . '\add_opps_post_type' );
 
 
 function add_opps_post_type() {

@@ -38,8 +38,7 @@ function register_dynamic_block() {
 
 	$blocks = [
 		'nhsjobs/jobsfeed',
-		'nhsjobs/jobscards',
-		'nhsjobs/oppsfeed'
+		'nhsjobs/jobscards'
 	];
 
 	foreach ( $blocks as $block ) {

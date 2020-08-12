@@ -51,12 +51,14 @@ function _get_plugin_url() {
 }
 
 
-require_once 'admin/admin.php';
-
 
 /**
- * The code that runs during plugin activation.
+ * Creates custom Taxonomies and flushes re-write rules
+ *
+ * @since  2.0.0
+ *
  */
+
 function nhsjobs_activate() {
 
 	NHS_JOBS\ADMIN\CustomPostType\add_opps_post_type();
@@ -66,6 +68,13 @@ function nhsjobs_activate() {
    require_once 'includes/activation.php';
 
 }
+
+/**
+ * Flushes re-write rules
+ *
+ * @since  2.0.0
+ *
+ */
 
 function nhsjobs_deactivate() {
     require_once 'includes/deactivation.php';
@@ -77,3 +86,4 @@ register_activation_hook( __FILE__, 'nhsjobs_activate' );
 register_deactivation_hook( __FILE__, 'nhsjobs_deactivate' );
 
 
+require_once 'admin/admin.php';

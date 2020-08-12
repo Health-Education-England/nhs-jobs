@@ -1,10 +1,9 @@
 <?php
 
-// namespace NHS_JOBS\ADMIN\Feed;
+namespace NHS_JOBS\ADMIN\Feed;
 
 function create_oppertunities_array(){
 
-	//cache the feed in transient cache
     $hash = md5('VolunteeringJobs');
 
     if ( false === ( $raw_recruitment = get_transient( $hash ) ) ) {      
@@ -79,8 +78,7 @@ function create_oppertunities_array(){
 }
 
 
-function _fetchVacancies($feedUrl = "https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title")
-{
+function _fetchVacancies($feedUrl = "https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title"){
     //cache the feed in transient cache
     $hash = md5($feedUrl);
     if ( false === ( $raw_recruitment = get_transient( $hash ) ) ) {
@@ -106,5 +104,6 @@ function fetchVacancies(){
     endif;
     
 }
-add_action( 'wp_ajax_fetchVacancies', 'fetchVacancies' );
-add_action( 'wp_ajax_nopriv_fetchVacancies', 'fetchVacancies' );
+
+add_action( 'wp_ajax_fetchVacancies', __NAMESPACE__ . '\fetchVacancies' );
+add_action( 'wp_ajax_nopriv_fetchVacancies', __NAMESPACE__ . '\fetchVacancies' );
