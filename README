@@ -1,12 +1,39 @@
-NHS WP Jobs Shortcode Plugin
+NHS WP Jobs and Opportunities Plugin
 
 before use:
 'npm i && npm run build' from the plugin folder
 
+
+## Gutenberg blocks 
+
+Three new Gutenberg blocks added
+
+
+### Jobs Block
+
+Adds a feed of jobs or opportunites to the front end of the site. A dropdown gives the option of either 
+
+- displaying a feed from the jobs.nhs.uk site with the default feed being https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title
+- display a feed of opportunites from the opportunites Custom Post Type
+
+
+### Jobs Cards
+
+Adds three cards displaying the latest jobs or opportunites. A dropdown gives the option of either 
+
+- the a feed from the jobs.nhs.uk site with the default feed being https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title
+- opportunites from the opportunites Custom Post Type
+
+
+### Opportunites Meta
+
+For the Opportunites Custom Post Type only. Adds in some post meta including opportunity expiry date and adding location, specialism & partner terms to the post.
+Restricted to the Opportunites post type.
+
+
+## Shortcode
+
+For backwards compatibility only 
+
 example usage of the shortcode url defaults to the one in example:
 [nhsjobfeed url=https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title]
-
-make sure you have this style included so it hides the employers that dont match your search
-.nhsuk-checkboxes__item.hidden {
-  display: none;
-}
