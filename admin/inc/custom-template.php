@@ -2,7 +2,20 @@
 
 namespace NHS_JOBS\ADMIN\CustomTemplate;
 
-add_filter( 'single_template', __NAMESPACE__ . '\load_oppertunities_template' );
+$theme = wp_get_theme(); // gets the current theme
+
+
+/**
+ * Checks if Nightingale is the current theme
+ * And loads a custom theme file if it is
+ */
+
+if ( 'Nightingale' == $theme->name || 'Nightingale' == $theme->parent_theme ) {
+
+	add_filter( 'single_template', __NAMESPACE__ . '\load_oppertunities_template' );
+
+}
+
 
 function load_oppertunities_template( $template ) {
 
