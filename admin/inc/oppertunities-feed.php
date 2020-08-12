@@ -4,14 +4,26 @@ namespace NHS_JOBS\ADMIN\Feed;
 
 function create_oppertunities_array(){
 
-    $hash = md5('VolunteeringJobs');
+    // $hash = md5('VolunteeringJobs');
+    $hash = 'VolunteeringJobs';
 
-    if ( false === ( $raw_recruitment = get_transient( $hash ) ) ) {      
+    if ( false === ( $raw_recruitment = get_transient( $hash ) ) ) {
+
+    	$time = date('Y-m-d\TH:i:s');
+
+		$meta_quer_args = array(
+			array(
+		        'key'       =>   'nhsjobs_end',
+		        'value'     =>   $time,
+		        'compare'   =>   '>='
+		    )
+		);      
 
 		$args = array(
 			'numberposts' => -1,
 			'post_type' => 'nhs_opportunities',
 			'nopaging' => true,
+			'meta_query' => $meta_quer_args,
 			'fields' => 'ids'
 		);
 

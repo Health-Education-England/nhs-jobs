@@ -46,6 +46,12 @@ require_once 'inc/custom-template.php';
 require_once 'inc/oppertunities-feed.php';
 
 /**
+ * Deletes transient when CPT saves
+ */
+
+require_once 'inc/save-post.php';
+
+/**
  * Registers Shortcode to include job listings for backwards compatibility
  */
 
