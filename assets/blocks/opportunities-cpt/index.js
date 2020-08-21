@@ -47,6 +47,11 @@ export default registerBlockType(
 				source: 'meta',
 				meta: 'nhsjobs_end',
 			},
+			link: {
+				type: 'string',
+				source: 'meta',
+				meta: 'nhsjobs_link',
+			},
 			location: {
 				type: 'string'
 			},
@@ -71,7 +76,7 @@ export default registerBlockType(
 			reusable: false, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { end, location, country, speciality, partners }, className, isSelected, setAttributes } = props;
+			const { attributes: { end, location, country, speciality, partners, link }, className, isSelected, setAttributes } = props;
 
 			return (
 				<div className={ className } >
@@ -112,6 +117,14 @@ export default registerBlockType(
 		                    	term='nhs_partners'
 		                    	parentLabel='Partners'
 		                    />
+		                    <h3>{__('Job application link', 'nhsjobs') }</h3>
+		                    <URLInput
+		                    	label={ __('Job link', 'nhsjobs') }
+		                    	onChange={ ( link ) => setAttributes( { link } ) }
+		                    	value={ link }
+		                    />
+		                    <small>If you want to add an email address, add a <strong> mailto: </strong> tag at the front of the email.
+		                    For example - <em>mailto:email@nhs.uk</em></small>
 		                </div>
                     </div>
 				</div>

@@ -17,10 +17,23 @@ function register_meta_fields() {
 		'sanitize_callback' => 'esc_html',
 	);
 
+	$link_args = array(
+		'type'         => 'string',
+		'single'       => true,
+		'show_in_rest' => true,
+		'sanitize_callback' => 'esc_url',
+	);
+
 	register_post_meta(
 		'',
 		'nhsjobs_end',
 		$end_args
+	);
+
+	register_post_meta(
+		'',
+		'nhsjobs_link',
+		$link_args
 	);
 
 
