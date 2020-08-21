@@ -37,7 +37,7 @@
         ?>
             <div class="nhsuk-grid__item nhsuk-grid-column-full">
                 <h2><?php echo esc_html( $title ); ?></h2>
-                <div class="nhsuk-grid-row nhsuk-promo-group homepage-vacancies">
+                <div class="nhsuk-grid-row nhsuk-promo-group nhsuk-job-cards">
                     <?php include 'job-card.php'; ?>
                 </div>
 

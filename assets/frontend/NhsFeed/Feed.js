@@ -21,7 +21,7 @@ export default function Feed(props) {
                           onFiltersChange={onFiltersChange}
                 />
             </div>
-            <div className="nhsuk-grid-column-two-thirds">
+            <div className="nhsuk-grid-column-two-thirds nhsuk-job-list">
                 {!items.length && (
                     <div className="nhsuk-grid-column-full-width nhsuk-promo">
                         <a className="nhsuk-promo__link-wrapper"
