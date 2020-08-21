@@ -11,6 +11,29 @@
     $vacancy_path = '/public/js/vacancyFeed.js';
     $css_path = '/public/css/jobs.frontend.css';
 
+    $not_found_txt = get_theme_mod( 
+        'nhsjobs_notfound', 
+        "We're sorry but there aren't any vacancies that match your criteria at the moment. You can try a different search or register your interest in a specific role on our contact us page." 
+    );
+
+    $not_found_id = get_theme_mod( 
+        'nhsjobs_contact', 
+        false 
+    );
+
+    $not_found_link = get_permalink( $not_found_id );
+
+    $viewOpp = get_theme_mod( 
+        'nhsjobs_viewOpp_txt', 
+        'View Vacancy' 
+    );
+
+    $apply_txt = get_theme_mod( 
+        'nhsjobs_apply_txt', 
+        'Apply Now' 
+    );
+
+
     wp_enqueue_script( 
         'nhsjobfeedjs',  
         _get_plugin_url() . $vacancy_path,
@@ -42,6 +65,9 @@
         action: "<?php echo 'fetchVacancies' ?>",
         nonce: "<?php echo $nonce ?>",
         feed: "<?php echo $feed; ?>",
-        type: "<?php echo $type; ?>"
+        type: "<?php echo $type; ?>",
+        notFoundTxt: <?php echo json_encode( $not_found_txt ); ?>,
+        notFoundUrl: "<?php echo esc_url( $not_found_link ); ?>",
+        btn: "<?php echo $viewOpp; ?>"
     };
 </script>

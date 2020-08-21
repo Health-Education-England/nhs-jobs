@@ -7,6 +7,7 @@
     $linkTxt = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
     $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
     $feed = get_query_var( $namespace . 'feed' ) ? get_query_var( $namespace . 'feed' ) : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title';
+    $viewOpp = get_theme_mod( 'nhsjobs_viewOpp_txt', 'View Vacancy' );
 
     $css_path = '/public/css/jobs.frontend.css';
 

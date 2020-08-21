@@ -52,6 +52,18 @@ require_once 'inc/oppertunities-feed.php';
 require_once 'inc/save-post.php';
 
 /**
+ * Checks if Opportunity has expired, and moves to draft if it has
+ */
+
+require_once 'inc/expire-posts.php';
+
+/**
+ * Adds options to the customizer panel
+ */
+
+require_once 'inc/customizer-options.php';
+
+/**
  * Registers Shortcode to include job listings for backwards compatibility
  */
 

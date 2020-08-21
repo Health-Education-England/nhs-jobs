@@ -42,7 +42,10 @@ export default class NhsFeed extends Component {
             },
             items: [],
             feed: [],
-            type: ''
+            type: '',
+            notFoundTxt: '',
+            notFoundUrl: '',
+            btn: ''
         };
 
         this.onFiltersChange = this.onFiltersChange.bind(this);
@@ -87,6 +90,8 @@ export default class NhsFeed extends Component {
             const feed = json.vacancy_details;
             const type = this.props.feed.type;
 
+            console.log(this.props.feed);
+
             const filters = this.setFilterOptions( feed, type ),
                 { pagination } = this.state,
                 { vacancies, total_pages } = this.paginate(feed, pagination.page, pagination.per_page);
@@ -99,7 +104,10 @@ export default class NhsFeed extends Component {
                 filters: filters,
                 items: vacancies,
                 feed: feed,
-                type: type
+                type: type,
+                notFoundTxt: this.props.feed.notFoundTxt,
+                notFoundUrl: this.props.feed.notFoundUrl,
+                btn: this.props.feed.btn,
             });
 
         }).catch((e) => {

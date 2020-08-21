@@ -10,7 +10,10 @@ export default function Feed(props) {
         pagination,
         items,
         onFiltersChange,
-        type
+        type,
+        btn,
+        notFoundTxt,
+        notFoundUrl
     } = props;
 
     return (
@@ -23,12 +26,19 @@ export default function Feed(props) {
             </div>
             <div className="nhsuk-grid-column-two-thirds nhsuk-job-list">
                 {!items.length && (
-                    <div className="nhsuk-grid-column-full-width nhsuk-promo">
+                    <div className="nhsuk-grid-column-full-width nhsuk-promo nhsjobs-not-found">
                         <a className="nhsuk-promo__link-wrapper"
-                           href="/contact/"
+                           href={notFoundUrl}
                         >
                             <div className="nhsuk-promo__content">
-                                We're sorry but there aren't any vacancies that match your criteria at the moment. You can try a different search or register your interest in a specific role on our <span>contact us</span> page.
+                            { notFoundTxt.split("\n").map( function(item) {
+                                  return (
+                                    <p>
+                                      {item}
+                                    </p>
+                                  )
+                                })}
+
                             </div>
                         </a>
                     </div>
@@ -36,7 +46,8 @@ export default function Feed(props) {
                 {items.map((item, key) => (
                     <FeedListing key={key}
                                  item={item}
-                                 type={type} />
+                                 type={type} 
+                                 btn={btn} />
                 ))}
                 <FeedPagination pagination={pagination}
                                 onFiltersChange={onFiltersChange}
