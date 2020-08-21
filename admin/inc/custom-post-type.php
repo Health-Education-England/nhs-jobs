@@ -56,7 +56,10 @@ function add_opps_post_type() {
 		'capability_type'       => 'page',
 		'show_in_rest'          =>  true,
 		'template'              => [
-			[ 'nhsjobs/opportunites', [] ]
+			[ 'nhsjobs/opportunites', [] ],
+			[ 'core/heading', [ 
+				'content' => 'Description' 
+			] ]
 		],
 	);
 
