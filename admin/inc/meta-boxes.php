@@ -35,7 +35,4 @@ function register_meta_fields() {
 		'nhsjobs_link',
 		$link_args
 	);
-
-
-
 }

@@ -59,10 +59,6 @@ function create_oppertunities_array(){
 				'job_employer'    => esc_html( $partner->name ),
 				'job_type'        => '',
 				'job_salary'      => '',
-				// 'job_location'    => array( 
-				// 						'continent' => esc_html( $location[0]->name ),
-				// 						'country'   => esc_html( $location[1]->name )
-				// 					),
 				'job_location'    => esc_html( $continent ),
 				'job_country'     => esc_html( $country ),
 				'job_closedate'   => esc_html( date('d/m/Y', $time ) ),
