@@ -1,7 +1,7 @@
 // Block dependancies
 
 import icon from './icon';
-
+import NHSTaxSelect from './taxSelect'
 
 // Internal block libraries
 
@@ -52,6 +52,12 @@ export default registerBlockType(
 			feed: {
 				type: 'string',
 				default: 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title'
+			},
+			location: {
+				type: 'string'
+			},
+			country: {
+				type: 'string'
 			}
 		},
 		supports: {
@@ -65,7 +71,7 @@ export default registerBlockType(
 			reusable: true, // whether block is allowed to be a reusable block
 		},
 		edit: props => {
-			const { attributes: { url, title, linkTxt, type, feed }, setAttributes, className } = props;
+			const { attributes: { url, title, linkTxt, type, feed, location, country }, setAttributes, className } = props;
 
 			let Cards = [];
 			let btn = '';
@@ -182,7 +188,25 @@ export default registerBlockType(
 						        ] }
 						        onChange={ ( type ) => { setAttributes( { type } ) } }
 						    />
-		  				</PanelRow>
+						</PanelRow>
+
+						{
+							type == 'opportunity' ? (
+
+								<PanelRow>
+								    <NHSTaxSelect 
+				                    	parentAttribute={ location }
+				                    	childAttribute={ country }
+				                    	parentAttrName='location'
+				                    	childAttrName='country'
+				                    	term='nhs_location'
+				                    	parentLabel='Continent'
+				                    	childLabel='Country'
+				                    />
+				  				</PanelRow>
+							):(null)
+						}
+						
 		  			</PanelBody>
 		  		</InspectorControls>,
 		  		<div className={ className }>
