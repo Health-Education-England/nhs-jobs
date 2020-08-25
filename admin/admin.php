@@ -32,11 +32,12 @@ require_once 'inc/dynamic-blocks.php';
 
 require_once 'inc/meta-boxes.php';
 
+
 /**
- * Registers custom page template for oppertunites CPT
+ * Adds Meta Data to the Nightingale action hook
  */
 
-require_once 'inc/custom-template.php';
+require_once 'inc/template-hooks.php';
 
 /**
  * Registers AJAX callback for jobs and oppportunities
