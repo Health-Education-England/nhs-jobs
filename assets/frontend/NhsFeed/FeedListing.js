@@ -38,8 +38,9 @@ export default function FeedListing(props) {
                target="_blank"
                rel="noopener noreferrer">
                 <div className="nhsuk-promo__content">
-                    <h2 className="nhsuk-promo__heading">
-                        {item.job_title + ' - ' + item.job_reference}
+                    <h2 className="nhsuk-promo__heading"
+                        dangerouslySetInnerHTML={{ __html: item.job_title + ' - ' + item.job_reference }}
+                    >
                     </h2>
                     <dl className="nhsuk-summary-list">
                         {Object.entries(attributes).map(([name, title], key) => (
@@ -51,7 +52,9 @@ export default function FeedListing(props) {
                                     {title}
                                 </dt>
                                 <dd className="nhsuk-summary-list__value">
-                                    {item[name]}
+                                    <span
+                                    dangerouslySetInnerHTML={{ __html: item[name] }}>
+                                    </span>
                                     { name == 'job_location' && (
                                         <span>{ ` - ${item['job_country']}`}</span>
                                     )}

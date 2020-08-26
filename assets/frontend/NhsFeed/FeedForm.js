@@ -103,7 +103,8 @@ export default class FeedForm extends Component {
                                         <label className="nhsuk-label nhsuk-checkboxes__label"
                                                htmlFor={name + key}
                                                id={name + key + "-label"}
-                                        >{option}</label>
+                                               dangerouslySetInnerHTML={{ __html: option }}
+                                        ></label>
                                     </div>
                                 ))}
                             </div>
