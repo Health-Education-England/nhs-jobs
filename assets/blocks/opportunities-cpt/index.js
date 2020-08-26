@@ -10,13 +10,14 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { URLInput } = wp.blockEditor;
 const { DateTimePicker, ToggleControl } = wp.components;
+const { select } = wp.data;
 
 
 // De-Registers this block if the post type is not the Oppertunities
 
 wp.domReady( function() {
 
-  const postType = wp.data.select('core/editor').getCurrentPostType();
+  const postType = select('core/editor').getCurrentPostType();
 
   if( postType !== 'nhs_opportunities' ){
   	wp.blocks.unregisterBlockType( 'nhsjobs/opportunites' );

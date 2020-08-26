@@ -204,7 +204,7 @@ export default registerBlockType(
 				                    	childLabel='Country'
 				                    />
 				  				</PanelRow>
-							):(null)
+							):( null )
 						}
 						
 		  			</PanelBody>
