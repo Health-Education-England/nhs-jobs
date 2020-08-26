@@ -40,7 +40,7 @@ function add_speciality_tax() {
 		'public'                     => true,
 		'show_ui'                    => true,
 		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
+		'show_in_nav_menus'          => false,
 		'show_tagcloud'              => false,
 		'show_in_rest'               => true,
 		'rewrite'                    => $rewrite,
@@ -145,4 +145,27 @@ function add_partners_tax() {
 	register_taxonomy( 'nhs_partners', array( 'nhs_opportunities' ), $args );
 
 }
+
+
+/**
+ * Disable display of Gutenberg Post Setting UI for a specific
+ * taxonomy. While this isn't the official API for this need,
+ * it works for now because only Gutenberg is dependent on the
+ * REST API response.
+ *
+ * https://github.com/WordPress/gutenberg/issues/6912
+ */
+
+add_filter( 'rest_prepare_taxonomy', function( $response, $taxonomy ){
+
+	if ( 'nhs_speciality' === $taxonomy->name ) {
+		$response->data['visibility']['show_ui'] = false;
+	}
+
+	if ( 'nhs_partners' === $taxonomy->name ) {
+		$response->data['visibility']['show_ui'] = false;
+	}
+
+	return $response;
+}, 10, 2 );
 
