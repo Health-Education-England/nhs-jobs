@@ -10,7 +10,7 @@ export default function FeedListing(props) {
 
         attributes = {
             job_location: 'Location',
-            job_staff_group: 'Speciality',
+            job_staff_group: 'Staff group',
             job_employer: 'Partner',
             job_closedate: 'Close date',
         };

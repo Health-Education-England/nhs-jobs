@@ -20,7 +20,7 @@ export default class NhsFeed extends Component {
                     options: {},
                 },
                 job_staff_group: {
-                    title: 'Sector',
+                    title: 'Staff group',
                     isSet: false,
                     options: {},
                 },

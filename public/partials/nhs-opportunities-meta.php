@@ -39,7 +39,7 @@
 
 			<dl class="pairedData">
 
-				<dt><?php echo __( 'Specialism:', 'nhsjobs' ); ?></dt>
+				<dt><?php echo __( 'Staff group:', 'nhsjobs' ); ?></dt>
 		        <dd>
 		        	<?php 
 

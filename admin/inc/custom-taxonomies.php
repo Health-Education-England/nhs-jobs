@@ -9,10 +9,10 @@ add_action( 'init',  __NAMESPACE__ . '\add_speciality_tax' );
 function add_speciality_tax() {
 
 	$labels = array(
-		'name'                       => _x( 'Speciality Categories', 'Taxonomy General Name', 'nhsjobs' ),
-		'singular_name'              => _x( 'Speciality', 'Taxonomy Singular Name', 'nhsjobs' ),
-		'menu_name'                  => __( 'Speciality', 'nhsjobs' ),
-		'all_items'                  => __( 'All Specialities', 'nhsjobs' ),
+		'name'                       => _x( 'Staff group categories', 'Taxonomy General Name', 'nhsjobs' ),
+		'singular_name'              => _x( 'Staff group', 'Taxonomy Singular Name', 'nhsjobs' ),
+		'menu_name'                  => __( 'Staff groups', 'nhsjobs' ),
+		'all_items'                  => __( 'All Staff groups', 'nhsjobs' ),
 		'parent_item'                => __( 'Parent Category', 'nhsjobs' ),
 		'parent_item_colon'          => __( 'Parent Category:', 'nhsjobs' ),
 		'new_item_name'              => __( 'New Category', 'nhsjobs' ),
