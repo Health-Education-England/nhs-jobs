@@ -244,7 +244,6 @@ export default class NhsFeed extends Component {
             items: vacancies,
         });
 
-        console.log( filteredVacancies );
     }
 
     render() {

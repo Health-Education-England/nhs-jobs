@@ -62,12 +62,12 @@
 <script>
     window.FEED = {
         url: "<?php echo esc_url( $url ) ?>",
-        action: "<?php echo 'fetchVacancies' ?>",
-        nonce: "<?php echo $nonce ?>",
+        action: "fetchVacancies",
+        nonce: "<?php echo esc_html( $nonce ); ?>",
         feed: "<?php echo $feed; ?>",
-        type: "<?php echo $type; ?>",
-        notFoundTxt: <?php echo json_encode( $not_found_txt ); ?>,
+        type: "<?php echo esc_html( $type ); ?>",
+        notFoundTxt: <?php echo json_encode( esc_html( $not_found_txt ) ); ?>,
         notFoundUrl: "<?php echo esc_url( $not_found_link ); ?>",
-        btn: "<?php echo $viewOpp; ?>"
+        btn: "<?php echo esc_html( $viewOpp ); ?>"
     };
 </script>

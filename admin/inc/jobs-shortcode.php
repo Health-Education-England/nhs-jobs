@@ -11,6 +11,23 @@ function nhsjobfeed_shortcode( $atts, $content = null ){
     $vacancy_path = '/public/js/vacancyFeed.js';
     $css_path = '/public/css/jobs.frontend.css';
 
+    $not_found_txt = get_theme_mod( 
+        'nhsjobs_notfound', 
+        "We're sorry but there aren't any vacancies that match your criteria at the moment. You can try a different search or register your interest in a specific role on our contact us page." 
+    );
+
+    $not_found_link = get_permalink( $not_found_id );
+
+    $viewOpp = get_theme_mod( 
+        'nhsjobs_viewOpp_txt', 
+        'View Vacancy' 
+    );
+
+    $apply_txt = get_theme_mod( 
+        'nhsjobs_apply_txt', 
+        'Apply Now' 
+    );
+
     wp_enqueue_script( 
         'nhsjobfeedjs',  
         _get_plugin_url() . $vacancy_path,
@@ -28,20 +45,31 @@ function nhsjobfeed_shortcode( $atts, $content = null ){
 
     $feed_url = $inputurl ? $inputurl : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&amp;field=title';
 
-    $feed = html_entity_decode( $feed_url );
-    $feed = urlencode($feed);
+    $feed = html_entity_decode( esc_url( $feed_url ) );
+    $feed = urlencode( $feed );
 
-    return <<<EOT
-<div id='nhs-feed' class='loading'></div>
-<script>
-    window.FEED = {
-        url: '$url',
-        action: 'fetchVacancies',
-        nonce: '$nonce',
-        feed: '$feed',
-        type: "jobs"
-    };
-</script>
-EOT;
+    ob_start();
+
+    ?>
+    <div id='nhs-feed' class='loading'></div>
+    <script>
+        window.FEED = {
+            url: "<?php echo esc_url( $url ) ?>",
+            action: "fetchVacancies",
+            nonce: "<?php echo esc_html( $nonce ); ?>",
+            feed: "<?php echo $feed; ?>",
+            type: "jobs",
+            notFoundTxt: <?php echo json_encode( esc_html( $not_found_txt ) ); ?>,
+            notFoundUrl: "<?php echo esc_url( $not_found_link ); ?>",
+            btn: "<?php echo esc_html( $viewOpp ); ?>"
+        };
+    </script>
+
+    <?php 
+
+    $output = ob_get_clean();
+
+    return $output;
+
 }
 add_shortcode( 'nhsjobfeed', 'nhsjobfeed_shortcode' );
