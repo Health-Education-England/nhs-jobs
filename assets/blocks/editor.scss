@@ -78,3 +78,25 @@
 		}
 	}
 }
+
+.wp-block-nhsjobs-jobscards{
+
+	.nhsuk-job-cards{
+		
+		.nhsuk-summary-list{
+			
+			.nhsuk-summary-list__row{
+				display: block;
+			}
+			.nhsuk-summary-list{
+				margin-top: 1rem;
+			}
+			.nhsuk-summary-list__key,
+			.nhsuk-summary-list__value{
+				width: 100%;
+				display: block;
+			}
+		}
+	}
+}
+

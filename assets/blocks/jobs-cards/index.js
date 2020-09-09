@@ -218,7 +218,7 @@ export default registerBlockType(
 								value={ title }
 								onChange={ ( title ) => setAttributes( { title } ) }
 							/>
-			                <div className="nhsuk-grid-row nhsuk-promo-group homepage-vacancies">
+			                <div className="nhsuk-grid-row nhsuk-promo-group nhsuk-job-cards">
 			                	{
 
 									Cards.map((job, index) => {
