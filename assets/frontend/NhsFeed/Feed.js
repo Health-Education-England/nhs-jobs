@@ -19,10 +19,12 @@ export default function Feed(props) {
     return (
         <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-one-third">
-                <h3>Filter your results and find the role for you</h3>
-                <FeedForm filters={filters}
-                          onFiltersChange={onFiltersChange}
-                />
+                <div className="nhsuk-filter">
+                    <h3>Filter your results and find the role for you</h3>
+                    <FeedForm filters={filters}
+                              onFiltersChange={onFiltersChange}
+                    />
+                </div>
             </div>
             <div className="nhsuk-grid-column-two-thirds nhsuk-job-list">
                 {!items.length && (
@@ -33,8 +35,9 @@ export default function Feed(props) {
                             <div className="nhsuk-promo__content">
                             { notFoundTxt.split("\n").map( function(item) {
                                   return (
-                                    <p>
-                                      {item}
+                                    <p 
+                                    dangerouslySetInnerHTML={{ __html: item }}>
+
                                     </p>
                                   )
                                 })}
