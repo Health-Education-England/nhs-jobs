@@ -5,7 +5,7 @@ namespace NHS_JOBS\ADMIN\ExpirePosts;
 
 if (! wp_next_scheduled( 'expire_opportunities' )){
 
-  wp_schedule_event( time(), 'daily', 'nhsjobs_expire_posts' );
+  wp_schedule_event( time(), 'twicedaily', 'nhsjobs_expire_posts' );
 
 }
 
