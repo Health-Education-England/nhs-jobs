@@ -1,11 +1,12 @@
 	<?php
-		$id = get_the_id();
+		$id           = get_the_id();
 		$specialities = get_the_terms( $id, 'nhs_speciality' );
-		$locations = get_the_terms( $id, 'nhs_location' );
-		$partners = get_the_terms( $id, 'nhs_partners' );
-		$end_date = get_post_meta( $id, 'nhsjobs_end', true );
-		$time = strtotime( $end_date );
-		$job_link = get_post_meta( $id, 'nhsjobs_link', true );
+		$locations    = get_the_terms( $id, 'nhs_location' );
+		$partners     = get_the_terms( $id, 'nhs_partners' );
+		$end_date     = get_post_meta( $id, 'nhsjobs_end', true );
+		$time         = strtotime( $end_date );
+		$job_link     = get_post_meta( $id, 'nhsjobs_link', true );
+		$job_link_txt = get_theme_mod( 'nhsjobs_apply_txt', 'Apply Now' );
 	?>
 
 	<div class="nhsuk-panel nhsuk-grid-row nhsuk-u-margin-bottom-4 nhsuk-u-margin-top-5 nhs-jobs-meta">
@@ -76,7 +77,7 @@
 			<?php if( $job_link ): ?>
 				<form action="<?php echo esc_url( $job_link ); ?>">
 					<button class="nhsuk-button" type="submit">
-					  Apply now
+					  <?php echo esc_html( $job_link_txt ); ?>
 					</button>
 				</form>
 

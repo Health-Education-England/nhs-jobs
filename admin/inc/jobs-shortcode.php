@@ -23,10 +23,6 @@ function nhsjobfeed_shortcode( $atts, $content = null ){
         'View Vacancy' 
     );
 
-    $apply_txt = get_theme_mod( 
-        'nhsjobs_apply_txt', 
-        'Apply Now' 
-    );
 
     wp_enqueue_script( 
         'nhsjobfeedjs',  
