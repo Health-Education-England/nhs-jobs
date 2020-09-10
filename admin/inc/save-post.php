@@ -8,7 +8,7 @@ function delete_transient_on_update( $post_id, $post ){
 
 	if( 'nhs_opportunities' !== $post->post_type ) return;
 
-	$hash = md5('VolunteeringJobs');
+	$hash = 'VolunteeringJobs';
 
 	delete_transient( $hash );
 }
