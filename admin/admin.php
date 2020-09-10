@@ -21,6 +21,12 @@ require_once 'inc/custom-post-type.php';
 require_once 'inc/custom-taxonomies.php';
 
 /**
+ * Registers Custom Block Categories
+ */
+
+require_once 'inc/block-categories.php';
+
+/**
  * Registers Dynamic Blocks
  */
 
