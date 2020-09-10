@@ -1,17 +1,17 @@
 <?php
 
-	$namespace = 'nhsjobs/jobscards/';
+	$namespace          = 'nhsjobs/jobscards/';
 
-    $url = get_query_var( $namespace . 'url' );
-    $title = get_query_var( $namespace . 'title' ) ? get_query_var( $namespace . 'title' ) : 'Latest Vacancies';
-    $linkTxt = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
-    $type = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
-    $feed = get_query_var( $namespace . 'feed' ) ? get_query_var( $namespace . 'feed' ) : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title';
-    $location_tax = get_query_var( $namespace . 'location' ) ? get_query_var( $namespace . 'location' ) : '';
-    $country_tax = get_query_var( $namespace . 'country' ) ? get_query_var( $namespace . 'country' ) : '';
-    $location_tax_obj = get_term_by( 'id', intval( $location_tax ), 'nhs_location' );
-    $country_tax_obj = get_term_by( 'id', intval( $country_tax ), 'nhs_location' );
-    $viewOpp = get_theme_mod( 'nhsjobs_viewOpp_txt', 'View Vacancy' );
+    $url                = get_query_var( $namespace . 'url' );
+    $title              = get_query_var( $namespace . 'title' ) ? get_query_var( $namespace . 'title' ) : 'Latest Vacancies';
+    $linkTxt            = get_query_var( $namespace . 'linkTxt' ) ? get_query_var( $namespace . 'linkTxt' ) : 'View all Vacancies';
+    $type               = get_query_var( $namespace . 'type' ) ? get_query_var( $namespace . 'type' ) : 'jobs';
+    $feed               = get_query_var( $namespace . 'feed' ) ? get_query_var( $namespace . 'feed' ) : 'https://www.jobs.nhs.uk/search_xml?keyword=nursing%20associate&field=title';
+    $location_tax       = get_query_var( $namespace . 'location' ) ? get_query_var( $namespace . 'location' ) : '';
+    $country_tax        = get_query_var( $namespace . 'country' ) ? get_query_var( $namespace . 'country' ) : '';
+    $location_tax_obj   = get_term_by( 'id', intval( $location_tax ), 'nhs_location' );
+    $country_tax_obj    = get_term_by( 'id', intval( $country_tax ), 'nhs_location' );
+    $viewOpp            = get_theme_mod( 'nhsjobs_viewOpp_txt', 'View Vacancy' );
 
 
     $css_path = '/public/css/jobs.frontend.css';
@@ -21,7 +21,7 @@
         _get_plugin_url() . $css_path,
         array(),
         filemtime( _get_plugin_directory() . $css_path )
-    ); 
+    );
 
 ?>
 
@@ -35,8 +35,6 @@
                 $feed_vacancies = NHS_JOBS\ADMIN\Feed\create_oppertunities_array();
             }
             
-            $homepage = false;
-
             if ($feed_vacancies && ($vacancies = $feed_vacancies->vacancy_details) && count($vacancies)) :
 
                 $cards = array();
@@ -57,13 +55,13 @@
 
                     if( $type === 'opportunity' && empty( $country_tax ) && ( $vacancy->job_location ===  $location_tax_obj->name ) ){
 
-                            array_push( $cards, $vacancy );
+                        array_push( $cards, $vacancy );
                     }
 
                     if( count( $cards ) == 3 ) : break; endif;
 
                 endforeach;
-                
+            
 
         ?>
             <div class="nhsuk-grid__item nhsuk-grid-column-full">
