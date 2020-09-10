@@ -28,9 +28,9 @@ const {
 export default registerBlockType(
 	'nhsjobs/jobsfeed',
 	{
-		title: __('Jobs Block', 'nhsjobs' ),
+		title: __('Jobs Block Feed', 'nhsjobs' ),
 		description: __('Add a feed from the NHS jobs site or the Opportunities Custom Post Type', 'nhsjobs' ),
-		category: 'nhsblocks',
+		category: 'nhsjobs-blocks',
 		icon: icon,
 		keywords: [
 			__( 'Jobs listings list Opportunities', 'nhsjobs' ),

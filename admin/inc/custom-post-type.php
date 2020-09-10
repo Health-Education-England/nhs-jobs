@@ -56,7 +56,7 @@ function add_opps_post_type() {
 		'capability_type'       => 'page',
 		'show_in_rest'          =>  true,
 		'template'              => [
-			[ 'nhsjobs/opportunites', [] ],
+			[ 'nhsjobs/opportunities', [] ],
 			[ 'core/heading', [ 
 				'content' => 'Description' 
 			] ]
@@ -66,3 +66,18 @@ function add_opps_post_type() {
 	register_post_type( 'nhs_opportunities', $args );
 
 }
+
+add_filter('pre_get_posts', __NAMESPACE__ . '\change_default_order_opps');
+
+function change_default_order_opps( $wp_query ) {
+
+	$post_type = $wp_query->query['post_type'];
+
+	if ( is_admin() && $post_type === 'nhs_opportunities' && !isset( $_GET['orderby'] ) ) {     
+    
+		$wp_query->set('orderby', 'date');
+		$wp_query->set('order', 'DESC');
+  	}
+
+}
+

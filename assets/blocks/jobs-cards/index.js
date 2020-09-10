@@ -27,7 +27,7 @@ export default registerBlockType(
 	{
 		title: __('Jobs Cards', 'nhsjobs' ),
 		description: __('Adds three of the latest jobs', 'nhsjobs' ),
-		category: 'nhsblocks',
+		category: 'nhsjobs-blocks',
 		icon: icon,
 		keywords: [
 			__( 'Jobs listings list', 'nhsjobs' ),

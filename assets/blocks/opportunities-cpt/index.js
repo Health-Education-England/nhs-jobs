@@ -20,7 +20,7 @@ wp.domReady( function() {
   const postType = select('core/editor').getCurrentPostType();
 
   if( postType !== 'nhs_opportunities' ){
-  	wp.blocks.unregisterBlockType( 'nhsjobs/opportunites' );
+  	wp.blocks.unregisterBlockType( 'nhsjobs/opportunities' );
   }
 
 } );
@@ -29,11 +29,11 @@ wp.domReady( function() {
 // Register Block
 
 export default registerBlockType(
-	'nhsjobs/opportunites',
+	'nhsjobs/opportunities',
 	{
 		title: __('Opportunities', 'nhsjobs' ),
 		description: __('Add meta data to the post', 'nhsjobs' ),
-		category: 'nhsblocks',
+		category: 'nhsjobs-blocks',
 		icon: icon,
 		keywords: [
 			__( 'Opportunities Meta Information', 'nhsjobs' ),
