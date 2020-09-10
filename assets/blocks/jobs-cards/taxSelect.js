@@ -9,7 +9,21 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
+		
+
+		// Clears Child Block atts if parent block changed
+
+		if( attribute === parentAttrName ){
+
+			dispatch( 'core/block-editor' ).updateBlockAttributes( 
+				block.clientId, 
+				{ [ childAttrName ]: '' } 
+			);
+
+		}
+
 		// updates block attribites
+
 
 		dispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, { [ attribute ]: select } );
 

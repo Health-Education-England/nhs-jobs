@@ -9,6 +9,17 @@ const NHSTaxSelect = ( { parentTerms, parentAttribute, parentAttrName, parentLab
 
 	const updateTaxonomy = ( select, attribute, relationship )=>{
 
+		// Clears Child Block atts if parent block changed
+
+		if( attribute === parentAttrName ){
+
+			dispatch( 'core/block-editor' ).updateBlockAttributes( 
+				block.clientId, 
+				{ [ childAttrName ]: '' } 
+			);
+
+		}
+
 		// updates block attribites
 
 		dispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, { [ attribute ]: select } );
@@ -106,10 +117,12 @@ export default withSelect( ( select, ownProps ) => {
 			'per_page'   : -1
 		}
 
+		let parentTerms = ownProps.term ? select('core').getEntityRecords('taxonomy', ownProps.term, parent_query ) : '';
+
 		let childTerms = ownProps.childAttrName ? select('core').getEntityRecords('taxonomy', ownProps.term, child_query ) : false;
 
 		return {
-			parentTerms: select('core').getEntityRecords('taxonomy', ownProps.term, parent_query ),
+			parentTerms: parentTerms,
 			childTerms: childTerms,
 			block: select("core/block-editor").getSelectedBlock(),
 			currentPost: select( 'core/editor' ).getCurrentPost(),
