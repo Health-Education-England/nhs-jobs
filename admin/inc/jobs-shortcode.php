@@ -1,7 +1,7 @@
 <?php
 
 //[nhsjobfeed]
-function nhsjobfeed_shortcode( $atts, $content = null ){
+function nhsjobs_shortcode( $atts, $content = null ){
 
     $inputurl = $atts['url'];
 
@@ -68,4 +68,4 @@ function nhsjobfeed_shortcode( $atts, $content = null ){
     return $output;
 
 }
-add_shortcode( 'nhsjobfeed', 'nhsjobfeed_shortcode' );
+add_shortcode( 'nhsjobfeed', 'nhsjobs_shortcode' );
