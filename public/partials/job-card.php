@@ -4,10 +4,10 @@
 
         $details = $type === 'jobs' ? ["job_location", "job_salary"] : ["job_location", "job_staff_group"];
     ?>
-        <div class="<?php if (!isset($homepage)) :?>nhsuk-grid-column-one-third nhsuk-promo<?php else: ?>nhsuk-grid-column-one-third nhsuk-promo-group__item<?php endif; ?>" data-id="<?php echo $vacancy->id ?>">
+        <div class="nhsuk-grid-column-one-third nhsuk-promo-group__item" data-id="<?php echo $vacancy->id ?>">
             <a class="nhsuk-promo__link-wrapper" href="<?php echo $vacancy->job_url ?>" target="_blank">
                 <div class="nhsuk-promo__content">
-                    <h2 class="nhsuk-promo__heading"><?php echo isset($homepage) ? $vacancy->job_title : $vacancy->job_title . ' - ' . $vacancy->job_reference ;?></h2>
+                    <h2 class="nhsuk-promo__heading"><?php echo $type === 'jobs' ? $vacancy->job_title . ' - ' . $vacancy->job_reference : $vacancy->job_title;?></h2>
 
                     <?php /* "job_type", "job_employer", "job_staff_group",  "job_postdate", "job_staff_group", "job_employer" */ ?>
                     <dl class="nhsuk-summary-list">

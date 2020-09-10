@@ -26,9 +26,7 @@ export default function FeedListing(props) {
             job_closedate: 'Close date',
         };
 
-    }
-
-    
+    }    
 
     return (
         <div className="nhsuk-grid-column-full-width nhsuk-promo"
@@ -38,10 +36,20 @@ export default function FeedListing(props) {
                target="_blank"
                rel="noopener noreferrer">
                 <div className="nhsuk-promo__content">
-                    <h2 className="nhsuk-promo__heading"
-                        dangerouslySetInnerHTML={{ __html: item.job_title + ' - ' + item.job_reference }}
-                    >
-                    </h2>
+
+                    {
+                        type == 'opportunity' ? (
+                            <h2 className="nhsuk-promo__heading"
+                                dangerouslySetInnerHTML={{ __html: item.job_title }}
+                            ></h2>
+                        ):(
+
+                            <h2 className="nhsuk-promo__heading"
+                                dangerouslySetInnerHTML={{ __html: item.job_title + ' - ' + item.job_reference }}
+                            ></h2>
+                        )
+                    }
+                    
                     <dl className="nhsuk-summary-list">
                         {Object.entries(attributes).map(([name, title], key) => (
                             <div
