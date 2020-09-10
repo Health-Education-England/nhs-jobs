@@ -90,8 +90,6 @@ export default class NhsFeed extends Component {
             const feed = json.vacancy_details;
             const type = this.props.feed.type;
 
-            console.log(this.props.feed);
-
             const filters = this.setFilterOptions( feed, type ),
                 { pagination } = this.state,
                 { vacancies, total_pages } = this.paginate(feed, pagination.page, pagination.per_page);
@@ -193,8 +191,6 @@ export default class NhsFeed extends Component {
 
         let filtersChanged = false,
             { filters, pagination, feed } = this.state;
-
-            //console.log( this.state, name, option, value );
 
         // filter or paginate
         if (name === 'pagination') {
