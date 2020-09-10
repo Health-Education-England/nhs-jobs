@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: NHS Jobs
+ * Plugin Name: NHS Jobs and Volunteering
  * Plugin URI: https://github.com/Health-Education-England/nhs-jobs
  * Description: NHS Jobs plugin. Extends plugin from Oneblackbear
  * Version: 2.0.0
