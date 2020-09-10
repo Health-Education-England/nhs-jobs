@@ -4,7 +4,8 @@ const path = require('path'),
     { CleanWebpackPlugin } = require('clean-webpack-plugin'),
     ManifestPlugin = require('webpack-manifest-plugin'),
     IgnoreEmitWebPackPlugin = require( 'ignore-emit-webpack-plugin' ),
-    MiniCssExtractPlugin = require('mini-css-extract-plugin')
+    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+    OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 ;
 
 const devMode = process.env.NODE_ENV !== 'production';
@@ -52,6 +53,14 @@ module.exports = (env, argv) => {
             new MiniCssExtractPlugin({
               filename: '[name].css',
               chunkFilename: '[id].css'
+            }),
+            new OptimizeCssAssetsPlugin({
+              assetNameRegExp: /\.css$/g,
+              cssProcessor: require('cssnano'),
+              cssProcessorPluginOptions: {
+                preset: ['default', { discardComments: { removeAll: true } }],
+              },
+              canPrint: true
             })
         ]
     ;
