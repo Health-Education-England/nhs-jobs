@@ -67,17 +67,17 @@ function add_opps_post_type() {
 
 }
 
-add_filter('pre_get_posts', __NAMESPACE__ . '\change_default_order_opps');
+// add_filter('pre_get_posts', __NAMESPACE__ . '\change_default_order_opps');
 
-function change_default_order_opps( $wp_query ) {
+// function change_default_order_opps( $wp_query ) {
 
-	$post_type = $wp_query->query['post_type'];
+// 	$post_type = $wp_query->query['post_type'];
 
-	if ( is_admin() && $post_type === 'nhs_opportunities' && !isset( $_GET['orderby'] ) ) {     
+// 	if ( is_admin() && $post_type === 'nhs_opportunities' && !isset( $_GET['orderby'] ) ) {     
     
-		$wp_query->set('orderby', 'date');
-		$wp_query->set('order', 'DESC');
-  	}
+// 		$wp_query->set('orderby', 'date');
+// 		$wp_query->set('order', 'DESC');
+//   	}
 
-}
+// }
 
