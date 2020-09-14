@@ -16,6 +16,11 @@ function nhsjobs_shortcode( $atts, $content = null ){
         "We're sorry but there aren't any vacancies that match your criteria at the moment. You can try a different search or register your interest in a specific role on our contact us page." 
     );
 
+    $not_found_id = get_theme_mod( 
+        'nhsjobs_contact', 
+        false 
+    );
+
     $not_found_link = get_permalink( $not_found_id );
 
     $viewOpp = get_theme_mod( 
