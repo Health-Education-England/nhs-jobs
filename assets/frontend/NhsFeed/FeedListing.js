@@ -6,6 +6,9 @@ export default function FeedListing(props) {
 
     let attributes = {};
 
+    let linkTarget = type == 'opportunity' ? "_self" : "_blank";
+    let linkRel = type == 'opportunity' ?  "" : "noopener noreferrer";
+
     if( type == 'opportunity' ){
 
         attributes = {
@@ -33,8 +36,9 @@ export default function FeedListing(props) {
              data-id={ item.id }>
             <a className="nhsuk-promo__link-wrapper"
                href={item.job_url}
-               target="_blank"
-               rel="noopener noreferrer">
+               target={ linkTarget } 
+               rel={ linkRel }>
+
                 <div className="nhsuk-promo__content">
 
                     {
