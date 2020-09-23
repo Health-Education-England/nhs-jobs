@@ -32,6 +32,28 @@ function register_block_assets() {
 		_get_plugin_url() . $editor_style_path,
 		[],
 		filemtime( _get_plugin_directory() . $editor_style_path )
-	);
+	);	
 
 }
+
+
+add_action( 'wp_enqueue_scripts',  __NAMESPACE__ . '\nhs_jobs_festyles' );
+
+function nhs_jobs_festyles(){
+
+	$frontend_path = '/public/css/jobs.frontend.css';
+
+
+	if( is_singular( 'nhs_opportunities' ) ){
+
+		// Only load on post type page
+		wp_enqueue_style( 
+	        'nhsjobs-fe-css',  
+	        _get_plugin_url() . $frontend_path,
+	        array(),
+	        filemtime( _get_plugin_directory() . $frontend_path )
+	    );
+	}
+
+}
+

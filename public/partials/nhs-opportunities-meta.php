@@ -9,7 +9,7 @@
 		$job_link_txt = get_theme_mod( 'nhsjobs_apply_txt', 'Apply Now' );
 	?>
 
-	<div class="nhsuk-panel nhsuk-grid-row nhsuk-u-margin-bottom-4 nhsuk-u-margin-top-5 nhs-jobs-meta">
+	<div class="nhsuk-panel nhsuk-grid-row nhs-jobs-meta">
 
 		<div class="nhsuk-grid-column-one-third">
 
