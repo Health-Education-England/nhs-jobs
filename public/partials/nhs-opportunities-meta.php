@@ -88,12 +88,35 @@
 
 	<?php 
 
-	$partner_txt = term_description( $partner->term_id );
+	$partner_txt    = term_description( $partner->term_id );
+	$partner_link   = get_term_meta( $partner->term_id, 'partner-link', true );
+	$partner_img_id = get_term_meta( $partner->term_id, 'partner-logo', true );
 
-	if( $partner_txt ): ?>
+
+	if( $partner_txt || $partner_link || $partner_img_id ): ?>
+
+		<?php if( $partner_img_id ):
+
+			echo wp_get_attachment_image( intval( $partner_img_id ), 'medium', false, array( 'class' => 'nhsjobs-partner-logo') );
+
+		endif; ?>
 		
 		<h3><?php echo __('About ', 'nhsjobs') . $partner->name; ?> </h3>
+
 		<?php echo wp_kses_post( $partner_txt ); ?>
+
+		<?php if( $partner_link ): ?>
+			<div class="nhsuk-action-link">
+			  <a class="nhsuk-action-link__link" href="<?php echo esc_url( $partner_link ); ?>" target="_blank">
+			    <svg class="nhsuk-icon nhsuk-icon__arrow-right-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+			      <path d="M0 0h24v24H0z" fill="none"></path>
+			      <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"></path>
+			    </svg>
+			    <span class="nhsuk-action-link__text"><?php echo _e( 'Visit Website', 'nhsjobs' ); ?></span>
+			  </a>
+			</div>
+		<?php endif; ?>
+
 		<hr />
 
 	<?php endif; ?>

@@ -57,3 +57,21 @@ function nhs_jobs_festyles(){
 
 }
 
+add_action( 'nhs_partners_edit_form_fields', __NAMESPACE__ . '\enqueue_media_library', 10, 1 );
+
+
+function enqueue_media_library( $hook ) {
+
+		wp_enqueue_media();
+
+		// Registers and enqueues the required javascript.
+		wp_register_script( 'nhsjobs-upload-img', _get_plugin_url() . '/admin/js/media-uploader.js' , array( 'jquery' ) );
+
+		wp_localize_script( 'nhsjobs-upload-img', 'meta_image',
+			array(
+				'title' => __( 'Choose or Upload Media', 'nhsjobs' ),
+				'button' => __( 'Use this media', 'nhsjobs' ),
+			)
+		);
+		wp_enqueue_script( 'nhsjobs-upload-img' );
+}

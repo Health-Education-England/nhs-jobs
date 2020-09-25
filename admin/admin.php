@@ -45,6 +45,13 @@ require_once 'inc/meta-boxes.php';
 
 require_once 'inc/template-hooks.php';
 
+
+/**
+ * Adds Meta Data to the Nightingale action hook
+ */
+
+require_once 'inc/custom-tax-fields.php';
+
 /**
  * Registers AJAX callback for jobs and oppportunities
  * blocks and sets transients 
