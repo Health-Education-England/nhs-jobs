@@ -5,7 +5,7 @@
         $details = $type === 'jobs' ? ["job_location", "job_salary"] : ["job_location", "job_staff_group"];
     ?>
         <div class="nhsuk-grid-column-one-third nhsuk-promo-group__item" data-id="<?php echo $vacancy->id ?>">
-            <a class="nhsuk-promo__link-wrapper" href="<?php echo $vacancy->job_url ?>" target="_blank">
+            <a class="nhsuk-promo__link-wrapper" href="<?php echo $vacancy->job_url ?>" <?php if($type === 'jobs'): echo 'target="_blank"'; endif; ?> >
                 <div class="nhsuk-promo__content">
                     <h2 class="nhsuk-promo__heading"><?php echo $type === 'jobs' ? $vacancy->job_title . ' - ' . $vacancy->job_reference : $vacancy->job_title;?></h2>
 
